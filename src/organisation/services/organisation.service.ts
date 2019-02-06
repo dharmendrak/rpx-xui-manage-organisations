@@ -3,25 +3,28 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 
+/**
+ * Using health to check that outbound http calls from this application
+ * to the Node layer work.
+ */
+export const ENVIRONMENT = {
+  health: '/api/organisation/address'
+}
 
 const dummy = {
   name: 'xyz solicitors Ltd',
-  address1: '10 Oxford Street',
+  address1: '11 Oxford Street',
   town: 'London',
-  postcode: 'W1 ABC',
-
+  postcode: 'SE1 ABC',
 }
-
-
-
 
 @Injectable()
 export class OrganisationService {
   constructor(private http: HttpClient) { }
 
   fetchOrganisation(): Observable<any> {
-    return of(dummy)
+    console.log('fetch organisation')
+    return this.http.get<any>(`${ENVIRONMENT.health}`);
+    // return of(dummy)
   }
-
-
 }
