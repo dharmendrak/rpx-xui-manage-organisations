@@ -12,4 +12,8 @@ router.use('/decisions', stateRouter)
  */
 router.use('/organisation', organisationRouter)
 
+router.use('/auth', authorisationRouter)
+
+
+
 export default router
