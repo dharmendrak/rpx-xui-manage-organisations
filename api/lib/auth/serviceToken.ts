@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from 'axios'
 import * as jwtDecode from 'jwt-decode'
 import * as log4js from 'log4js'
 import * as otp from 'otp'
-import { config } from '../config'
-import { Token } from '../lib/models'
+import config from '../config'
+import { Token } from '../models'
 
 const logger = log4js.getLogger('serviceToken')
 logger.level = config.logging

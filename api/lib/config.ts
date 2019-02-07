@@ -1,5 +1,16 @@
 export default {
+    cookies: {
+        token: '__auth__',
+    },
+    exceptionOptions: {
+        maxLines: 1,
+    },
+    indexUrl: '/',
     logging: 'debug',
+    maxLogLine: 160,
+    microservice: 'jui_webapp',
+    protocol: 'http',
+    s2s: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal',
     secureCookie: false,
     services: {
         idam: {
@@ -11,5 +22,4 @@ export default {
         },
     },
     sessionSecret: 'secretSauce',
-
 }

@@ -20,7 +20,7 @@ router.get('/logout', auth.logout)
 /**
  * TODO: Think about whether to move these out.
  */
-app.get('/user/profile', user.profile)
-app.get('/user', user.get)
+router.get('/user/profile', user.profile)
+router.get('/user', user.get)
 
 export default router

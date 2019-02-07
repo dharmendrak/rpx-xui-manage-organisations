@@ -1,5 +1,6 @@
 import * as express from 'express'
 import organisationRouter from './organisation'
+import authorisationRouter from './authorisation'
 import stateRouter from './states'
 
 const router = express.Router({ mergeParams: true })

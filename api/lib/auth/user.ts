@@ -1,12 +1,12 @@
 import axios, { AxiosPromise, AxiosResponse } from 'axios'
 import * as express from 'express'
 import * as log4js from 'log4js'
-import { config } from '../config'
+import config from '../config'
 import { profileMap } from '../config/refProfile'
 import { roleMap } from '../config/refRoles'
-import { http } from '../lib'
-import { EnhancedRequest } from '../lib/models'
-import { asyncReturnOrError } from '../lib/util'
+import { http } from '../http'
+import { EnhancedRequest } from '../models'
+import { asyncReturnOrError } from '../util'
 
 const logger = log4js.getLogger('auth')
 logger.level = config.logging
