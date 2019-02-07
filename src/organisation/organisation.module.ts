@@ -7,6 +7,9 @@ import { SharedModule } from '../app/shared/shared.module';
 // containers
 import * as fromContainers from './containers';
 
+// guards
+import {CanActivateAuthGuard} from '../app/guard/auth-guard';
+
 // services
 import * as fromServices from './services';
 import { StoreModule } from '@ngrx/store';
@@ -27,7 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [...fromContainers.containers],
   declarations: [...fromContainers.containers],
-  providers: [...fromServices.services]
+
+  // TODO: Should we place CanActivateAuthGuard in here, or within the
+  // services?
+  providers: [...fromServices.services, CanActivateAuthGuard]
 })
 
 /**
