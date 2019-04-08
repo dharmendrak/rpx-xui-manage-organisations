@@ -11,7 +11,7 @@ import {HtmlTemplatesHelper} from '../../util/helpers/html-templates.helper';
 @Component({
   selector: 'lib-gov-uk-textarea',
   template: `
-    <div [formGroup]="group" 
+    <div [formGroup]="group"
       class="govuk-form-group" [ngClass]="{'govuk-form-group--error': errorMessage?.isInvalid}">
       <lib-gov-label [config]="config"></lib-gov-label>
       <span id="more-detail-hint" class="govuk-hint">
@@ -21,7 +21,7 @@ import {HtmlTemplatesHelper} from '../../util/helpers/html-templates.helper';
       <textarea
         class="govuk-textarea" [formControlName]="config.key"
         [ngClass]="{'govuk-textarea--error': errorMessage?.isInvalid}"
-        [id]="config.id" name="more-detail" [rows]="config.rows" [attr.aria-describedby]="setDescribedBy()"></textarea>
+        [id]="config.key" name="more-detail" [rows]="config.rows" [attr.aria-describedby]="setDescribedBy()"></textarea>
     </div>
   `
 })

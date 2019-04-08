@@ -54,8 +54,8 @@ export class StyleGuideComponent implements OnInit {
         year: new FormControl('')
       }, dateValidator()),
       [CONST.STG_FORM_MODEL.sortBy]: new FormControl('', Validators.required),
-      [CONST.STG_FORM_MODEL.moreDetails]: new FormControl('', Validators.required),
-      [CONST.STG_FORM_MODEL.fileUpload]: new FormControl('', Validators.required)
+      [CONST.STG_FORM_MODEL.fileUpload]: new FormControl('', Validators.required),
+      [CONST.STG_FORM_MODEL.moreDetails]: new FormControl('', Validators.required)
     });
   }
 
@@ -94,11 +94,11 @@ export class StyleGuideComponent implements OnInit {
         [CONST.STG_FORM_MODEL.sortBy]: [(this.f[CONST.STG_FORM_MODEL.sortBy].errors &&
           this.f[CONST.STG_FORM_MODEL.sortBy].errors.required)],
 
+        [CONST.STG_FORM_MODEL.fileUpload]: [(this.f[CONST.STG_FORM_MODEL.fileUpload].errors &&
+          this.f[CONST.STG_FORM_MODEL.fileUpload].errors.required)],
+
         [CONST.STG_FORM_MODEL.moreDetails]: [(this.f[CONST.STG_FORM_MODEL.moreDetails].errors &&
           this.f[CONST.STG_FORM_MODEL.moreDetails].errors.required)],
-
-        [CONST.STG_FORM_MODEL.fileUpload]: [(this.f[CONST.STG_FORM_MODEL.fileUpload].errors &&
-          this.f[CONST.STG_FORM_MODEL.fileUpload].errors.required)]
       },
       errorMessages: this.errorMessages,
       isSubmitted: true
