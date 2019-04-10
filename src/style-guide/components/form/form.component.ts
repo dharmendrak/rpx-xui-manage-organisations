@@ -37,7 +37,6 @@ export class FormComponent implements OnInit {
             value: 'createCases',
             label: 'Create cases',
             name: 'checkboxes',
-            hint: 'Create, progress and view the status of the user\'s own cases',
             focusOn: 'checkboxes'
           }
         },

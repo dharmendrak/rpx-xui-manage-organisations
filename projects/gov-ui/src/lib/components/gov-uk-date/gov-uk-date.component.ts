@@ -10,7 +10,7 @@ import {Component, Input, OnInit} from '@angular/core';
   template: `
     <div class="govuk-form-group" [ngClass]="{'govuk-form-group--error': errorMessage?.isInvalid}" [formGroup]="formGroup">
       <lib-gov-uk-fieldset
-        [config]="{legend: 'Date component', classes: 'govuk-label--m', id: config.id, hint: ' For example, 12 11 2007'}"
+        [config]="{legend: 'Date component', classes: 'govuk-fieldset__legend--m', id: config.id, hint: ' For example, 12 11 2007'}"
         [isHeading]="false"
         [errorMessage]="errorMessage">
         <lib-gov-uk-error-message
@@ -23,7 +23,7 @@ import {Component, Input, OnInit} from '@angular/core';
           <div class="govuk-date-input__item">
             <div class="govuk-form-group">
               <lib-gov-label
-                [config]="{label: 'Day', name: config.id, id: config.id+'-day', classes: 'govuk-date-input__label'}">
+                [config]="{label: 'Day', name: config.id+'-day', name: config.id+'-day', id: config.id+'-day', classes: 'govuk-date-input__label'}">
               </lib-gov-label>
               <input class="govuk-input govuk-date-input__input govuk-input--width-2"
                      [ngClass]="{'govuk-input--error': errorMessage?.isInvalid}"
@@ -60,12 +60,10 @@ import {Component, Input, OnInit} from '@angular/core';
       </lib-gov-uk-fieldset>
     </div>`
 })
-export class GovUkDateComponent implements OnInit {
+export class GovUkDateComponent {
   constructor () { }
   @Input() config: { id: string };
   @Input() errorMessage: {isInvalid: boolean; messages: string[]}
   @Input() formGroup;
 
-  ngOnInit(): void {
-  }
 }

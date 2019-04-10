@@ -12,11 +12,11 @@ import {HtmlTemplatesHelper} from '../../util/helpers/html-templates.helper';
   selector: 'lib-gov-uk-fieldset',
   template: `
       <fieldset class="govuk-fieldset" [attr.aria-describedby]="setDescribedBy()">
-        <legend [class]="config.classes || null + ' govuk-fieldset__legend'" *ngIf="!isHeading">
+        <legend [class]="config.classes || '' + ' govuk-fieldset__legend'" *ngIf="!isHeading">
           {{config.legend}}
         </legend>
 
-        <legend [class]="config.classes || null + ' govuk-fieldset__legend'" *ngIf="isHeading">
+        <legend [class]="config.classes || '' + ' govuk-fieldset__legend'" *ngIf="isHeading">
           <h1 class="govuk-fieldset__heading">{{config.legend}}</h1>
         </legend>
 

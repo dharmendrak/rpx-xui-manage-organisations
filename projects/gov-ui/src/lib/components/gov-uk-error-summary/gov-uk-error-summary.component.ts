@@ -8,8 +8,7 @@ import {DOCUMENT} from '@angular/common';
 */
 @Component({
   selector: 'lib-gov-uk-error-summary',
-  template: `<div id="errorSummary" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1"
-                  data-module="error-summary">
+  template: `<div id="errorSummary" class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1">
               <h2 class="govuk-error-summary__title" id="error-summary-title">
                 There is a problem
               </h2>
