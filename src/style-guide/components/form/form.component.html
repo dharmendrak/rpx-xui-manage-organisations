@@ -4,7 +4,7 @@
   <ng-container *ngIf="dispatchLoadData()">
 
     <lib-gov-uk-input
-      [config]="{label: 'Input Component', hint: 'Include some text.', name: 'input', id: 'input', type: 'text', classes: 'testClass'}"
+      [config]="{label: 'Input Component', name: 'input', id: 'input', type: 'text', classes: 'testClass', isPageHeading: true }"
       [errorMessage]="errors[formConstModel.input]"
       [group]="styleGuideFromGroup">
     </lib-gov-uk-input>
@@ -29,7 +29,7 @@
     <lib-gov-uk-file-upload
       [errorMessage]="errors[formConstModel.fileUpload]"
       [group]="styleGuideFromGroup"
-      [config]="{label: 'Upload a file', id: formConstModel.fileUpload, name: 'fileUpload'}"
+      [config]="{label: 'Upload a file', id: formConstModel.fileUpload, name: 'fileUpload', hint: 'Say something I am giving up on you'}"
     ></lib-gov-uk-file-upload>
 
     <lib-gov-uk-textarea

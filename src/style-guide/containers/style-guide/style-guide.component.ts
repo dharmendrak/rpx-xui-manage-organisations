@@ -47,15 +47,15 @@ export class StyleGuideComponent implements OnInit {
         createCases: new FormControl(),
         viewCases: new FormControl(''),
       }, checkboxesBeCheckedValidator()),
-      [CONST.STG_FORM_MODEL.contactPreference]: new FormControl('', Validators.required),
+      [CONST.STG_FORM_MODEL.contactPreference]: new FormControl('phone', Validators.required),
       [CONST.STG_FORM_MODEL.passport]: new FormGroup({ // date
         day: new FormControl(''),
         month: new FormControl(''),
         year: new FormControl('')
       }, dateValidator()),
-      [CONST.STG_FORM_MODEL.sortBy]: new FormControl('', Validators.required),
+      [CONST.STG_FORM_MODEL.sortBy]: new FormControl('updated', Validators.required),
       [CONST.STG_FORM_MODEL.fileUpload]: new FormControl('', Validators.required),
-      [CONST.STG_FORM_MODEL.moreDetails]: new FormControl('', Validators.required)
+      [CONST.STG_FORM_MODEL.moreDetails]: new FormControl('', [Validators.required, Validators.max(10)])
     });
   }
 

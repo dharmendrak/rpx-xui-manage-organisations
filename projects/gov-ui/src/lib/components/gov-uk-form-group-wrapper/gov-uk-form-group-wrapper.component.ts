@@ -10,7 +10,7 @@ import {Component, Input} from '@angular/core';
   template: `
     <div class="govuk-form-group" [attr.formGroupName]="group" [ngClass]="{'govuk-form-group--error': (error?.isInvalid)}">
       <lib-gov-uk-fieldset
-        [config]="{legend: config.legend, classes: 'govuk-label--m', id: config.key, hint: config.hint}"
+        [config]="{legend: config.legend, id: config.key, hint: config.hint, classes: 'govuk-fieldset__legend--xl'}"
         [isHeading]="config.isHeading" 
         [errorMessage]="error">
 

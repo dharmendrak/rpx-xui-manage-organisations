@@ -60,7 +60,7 @@ export class FormComponent implements OnInit {
         hint: 'Choose what the user will be able to do. You can change this later.',
         legend: 'How would you prefer to be contacted?',
         key: CONST.STG_FORM_MODEL.contactPreference,
-        isHeading: false
+        isHeading: true
       },
       group: this.styleGuideFromGroup,
       items: [
@@ -95,7 +95,6 @@ export class FormComponent implements OnInit {
     this.sortBySelect = {
       group: this.styleGuideFromGroup,
       config: {
-        hint: 'You can sort by different categories',
         id: 'sortBy',
         label: 'Sort By',
         classes: 'govuk-label--m',
@@ -126,7 +125,7 @@ export class FormComponent implements OnInit {
     };
 
     this.moreDetail = {
-      key: 'moreDetails',
+      id: 'moreDetails',
       label: 'Can you provide more detail?',
       hint: 'Do not include personal or financial information, like your National Insurance number or credit card details.',
       rows: 5,

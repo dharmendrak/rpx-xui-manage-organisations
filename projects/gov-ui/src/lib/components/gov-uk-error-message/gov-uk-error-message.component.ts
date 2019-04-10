@@ -8,9 +8,11 @@ import {Component, Directive, Input} from '@angular/core';
 @Component({
   selector: ' lib-gov-uk-error-message',
   template: `
-    <span class="govuk-error-message" [id]="config.id + '-error'" *ngFor="let message of errorMessage?.messages">
-      <span class="govuk-visually-hidden">Error:</span>{{message}}
-    </span>
+    <ng-container *ngFor="let message of errorMessage?.messages">
+      <span class="govuk-error-message" [id]="config.id + '-error'" *ngIf="message">
+        <span class="govuk-visually-hidden">Error:</span>{{message}}
+      </span>
+    </ng-container>
   `
 })
 export class GovUkErrorMessageComponent {

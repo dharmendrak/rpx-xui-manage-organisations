@@ -8,7 +8,7 @@ import {Component, Input} from '@angular/core';
 * */
 @Component({
   selector: 'lib-gov-label',
-  template: `<h1 *ngIf="config.isPageHeading else noHeading">
+  template: `<h1 *ngIf="config.isPageHeading else noHeading" class="govuk-label-wrapper">
           <label *ngIf="config.label" [class]="config.classes + ' govuk-label'"
                  [for]="config.id" [innerHTML]="config.label">
           </label>

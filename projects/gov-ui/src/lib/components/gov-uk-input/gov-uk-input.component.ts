@@ -35,6 +35,7 @@ export class GovUkInputComponent implements OnInit, OnChanges {
   @Input() config: { label: string, hint: string; name: string; id: string, type: string; isPageHeading, classes: string };
 
   ngOnInit(): void {
+    // todo make sure it can receive config label classes and overwrite them
     this.config.classes = 'govuk-label--m';
   }
 
