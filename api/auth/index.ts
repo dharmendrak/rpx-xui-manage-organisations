@@ -21,7 +21,7 @@ export async function attach(req: EnhancedRequest, res: express.Response, next: 
         const token = await serviceTokenGenerator()
 
         req.headers.ServiceAuthorization = token.token
-        logger.info(' session.auth.userId',  session.auth.email)
+        // logger.info(' session.auth.userId',  session.auth.email)
 
         const userId = session.auth.userId
         const jwt = session.auth.token
@@ -100,12 +100,12 @@ export async function oauth(req: EnhancedRequest, res: express.Response, next: e
             // set browser cookie
             res.cookie(config.cookies.token, accessToken)
 
-            const orgIdResponse = await getOrganisationId(details)
-            const orgId = orgIdResponse.data.id
+            // const orgIdResponse = await getOrganisationId(details)
+            // const orgId = orgIdResponse.data.id
             //
             session.auth = {
                 email: details.data.email,
-                orgId,
+                orgId: '',
                 roles: details.data.roles,
                 token: response.data.access_token,
                 userId: details.data.id

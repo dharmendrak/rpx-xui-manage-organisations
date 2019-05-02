@@ -1,12 +1,22 @@
 {
     "/api/*": {
-        "target": "http://localhost:3000",
+        "target": "http://localhost:3001",
         "secure": false,
         "logLevel": "debug"
     },
     "/oauth2/callback": {
-        "target": "http://localhost:3000",
+        "target": "http://localhost:3001",
         "secure": false,
         "logLevel": "debug"
-    }
+    },
+    "http://localhost:3000/data/internal/case-types/TestAddressBookCase/event-triggers/createCase?ignore-warning=false": {
+        "target": "http://localhost:3001/api/data/internal/case-types/TestAddressBookCase/event-triggers/createCase",
+        "secure": false,
+        "logLevel": "debug"
+   },
+  "http://localhost:3000/data/internal/profile":{
+        "target": "http://localhost:3001/api/data/internal/profile",
+        "secure": false,
+        "logLevel": "debug"
+  }
 }

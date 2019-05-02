@@ -17,9 +17,9 @@ async function handleUserRoute(req, res) {
   const mockUser: UserProfileModel = UserMock
 
   try {
-    const response = await http.get(`${config.services.rdProfessionalApi}/search/users/henry_fr_harper@yahoo.com`)
+    // const response = await http.get(`${config.services.rdProfessionalApi}/search/users/henry_fr_harper@yahoo.com`)
     // const response = await http.get(`${config.services.rdProfessionalApi}/search/users/${req.session.auth.email}`)
-    logger.info('Calling responser', response)
+    // logger.info('Calling responser', response)
     res.send(mockUser)
   } catch (error) {
     logger.info(error)

@@ -27,6 +27,7 @@ import { AuthModule } from '../auth/auth.module';
 import { FeeAccountsModule } from 'src/fee-accounts/fee-accounts.module';
 
 import config from '../../api/lib/config';
+import {HttpClientModule} from '@angular/common/http';
 
 export const metaReducers: MetaReducer<any>[] = !config.production
   ? [storeFreeze]
@@ -47,6 +48,7 @@ export const metaReducers: MetaReducer<any>[] = !config.production
     EffectsModule.forRoot(effects),
     SharedModule,
     AuthModule,
+    HttpClientModule,
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({
       logOnly: config.production

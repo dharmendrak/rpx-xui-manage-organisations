@@ -12,6 +12,7 @@ import { appInsights } from './lib/appInsights'
 import config from './lib/config'
 import { errorStack } from './lib/errorStack'
 import routes from './routes'
+import {http} from './lib/http';
 
 const FileStore = sessionFileStore(session)
 
@@ -48,8 +49,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.get('/oauth2/callback', auth.oauth)
-app.use(auth.attach)
 
+app.use(auth.attach)
 app.use('/api', routes)
 
 app.use('/*', (req, res) => {
@@ -69,4 +70,4 @@ if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
     config.appInsightsInstrumentationKey = process.env.APPINSIGHTS_INSTRUMENTATIONKEY
 }
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3001)

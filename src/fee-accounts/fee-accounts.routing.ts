@@ -2,14 +2,9 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 import {AuthGuard} from '../auth/guards/auth.guard';
-import {AccountOverviewComponent} from './containers/account-overview/account-overview.component';
-import {AccountSummaryComponent} from './containers/account-summary/account-summary.component';
-import {AccountTransactionsComponent} from './containers/account-transactions/account-transactions.component';
 import {OrganisationAccountsComponent} from './containers/overview/account-overview.component';
 import {AccountsGuard} from './guards/accounts.guard';
-import {AccountSummaryGuard} from './guards/acccounts-summary.guards';
-import {Organisation} from '../organisation/organisation.model';
-
+import {editorRouting} from '@hmcts/ccd-case-ui-toolkit';
 export const ROUTES: Routes = [
   {
     path: '',
@@ -18,27 +13,8 @@ export const ROUTES: Routes = [
       AuthGuard,
       AccountsGuard
     ],
+    children: editorRouting
   },
-  {
-    path: 'account',
-    component: AccountOverviewComponent,
-    canActivate: [
-      AuthGuard
-    ],
-    children: [
-      {
-        path: ':id',
-        component: AccountSummaryComponent,
-        canActivate: [
-          AccountSummaryGuard
-        ]
-      },
-      {
-        path: ':id/transactions',
-        component: AccountTransactionsComponent
-      }
-    ]
-  }
 ];
 
 

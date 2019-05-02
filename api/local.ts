@@ -11,6 +11,10 @@ import { appInsights } from './lib/appInsights'
 import config from './lib/config'
 import { errorStack } from './lib/errorStack'
 import routes from './routes'
+import {EnhancedRequest} from './lib/models';
+import {PaymentAccountDto} from './lib/models/transactions';
+import {asyncReturnOrError} from './lib/util';
+import {getAccountsForOrganisation} from './services/rdProfessionals';
 
 const FileStore = sessionFileStore(session)
 
@@ -47,13 +51,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-app.get('/oauth2/callback', auth.oauth)
+// app.get('/oauth2/callback', auth.oauth)
 
-app.use(auth.attach)
-
+// app.use(auth.attach)
 app.use('/api', routes)
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 app.listen(port)
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {

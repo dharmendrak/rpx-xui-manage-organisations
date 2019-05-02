@@ -10,22 +10,45 @@ import {LoadFeeAccounts} from '../../../fee-accounts/store';
   templateUrl: './account-overview.component.html',
 })
 
-export class OrganisationAccountsComponent implements OnInit{
-  columnConfig: GovukTableColumnConfig[];
-  tableRows: {}[];
-  accounts$: Observable<Array<PbaAccountsSummary>>;
-  loading$: Observable<boolean>;
+export class OrganisationAccountsComponent{
 
-  constructor(private store: Store<fromFeeAccountsStore.FeeAccountsState>) {}
+  caseSelected: string
+  // caseType: object = {
+  //   jurisdictionId: "DIVORCE",
+  //   caseTypeId: "DIVORCE",
+  //   eventTriggerId: "solicitorCreate"
+  // }
+  // caseType: object = {
+  //   jurisdictionId: "notselected",
+  //   caseTypeId: "",
+  //   eventTriggerId: ""
+  // }
 
-  ngOnInit(): void {
-    this.store.dispatch(new fromFeeAccountsStore.LoadFeeAccounts());
-    this.accounts$ = this.store.pipe(select(fromFeeAccountsStore.feeAccounts));
-    this.loading$ = this.store.pipe(select(fromFeeAccountsStore.feeAccountsLoading));
-    this.columnConfig = [
-      { header: 'Account number', key: 'pbaNumber', type: 'link' },
-      { header: 'Oraganisation Id', key: 'organisationId' }
-    ];
+  jurisdictionId = 'TEST';
+  caseTypeId = 'TestAddressBookCase';
+  eventTriggerId = 'createCase';
+
+
+  caseType: object = {
+    jurisdictionId: "TEST",
+    caseTypeId: "TestAddressBookCase",
+    eventTriggerId: "createCase"
+  }
+
+  submit(event: any): void {
+    console.log('CaseCreateConsumerComponent submit event=', event)
+
+  }
+
+  cancel(event: any): void {
+    console.log('CaseCreateConsumerComponent cancel event=', event)
+  }
+
+
+
+  chooseEvent() {
+    this.caseType = JSON.parse(this.caseSelected)
+    console.log(this.caseType)
   }
 
 }

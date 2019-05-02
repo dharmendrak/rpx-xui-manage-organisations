@@ -1,12 +1,75 @@
- <h1 class="hmcts-page-heading__title govuk-heading-xl">Fee accounts</h1>
+<ng-container *ngIf="caseType.jurisdictionId=='notselected'; else ccdCreate">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <app-govuk-table
-        *ngIf="!(loading$ | async) else loading"
-        [columnConfig]="columnConfig" [rows]="accounts$ | async" [firstCellIsHeader]="false" [caption]="''"
-      ></app-govuk-table>
-      <ng-template #loading>
-        <div>Loading...</div>
-      </ng-template>
+      <div class="govuk-form-group">
+
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+            <h1 class="govuk-fieldset__heading">
+              What type of case do you want to create?
+            </h1>
+          </legend>
+
+
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="type" name="type" type="radio" value='{"jurisdictionId":"DIVORCE","caseTypeId":"DIVORCE","eventTriggerId":"solicitorCreate"}'
+                     [(ngModel)]="caseSelected">
+              <label class="govuk-label govuk-radios__label" for="type-1">
+                Divorce
+              </label>
+            </div>
+
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="type" name="type" type="radio" value='{"jurisdictionId":"DIVORCE","caseTypeId":"Financial Remedy MVP_v0.3","eventTriggerId":"FR_solicitorCreate"}'
+                     [(ngModel)]="caseSelected">
+              <label class="govuk-label govuk-radios__label" for="type-2">
+                Financial remedy (not contested)
+              </label>
+            </div>
+
+
+
+
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="type" name="type" type="radio" value='{"jurisdictionId":"PROBATE","caseTypeId":"GrantOfRepresentation","eventTriggerId":"solicitorCreateApplication"}'
+                     [(ngModel)]="caseSelected">
+              <label class="govuk-label govuk-radios__label" for="type-3">
+                Probate
+              </label>
+            </div>
+
+
+
+          </div>
+        </fieldset>
+
+
+      </div>
+      <button class="govuk-button" (click)="chooseEvent()">Continue</button>
     </div>
-</div>
+  </div>
+</ng-container>
+
+<ng-template>
+  {{caseType.jurisdictionId}},
+  {{caseType.caseTypeId}},
+  {{caseType.eventTriggerId}}
+  here
+
+</ng-template>
+asdasdasdasdasd
+<ccd-case-create
+  [jurisdiction]="caseType.jurisdictionId"
+  [caseType]="caseType.caseTypeId"
+  [event]="caseType.eventTriggerId"
+  (cancelled)="cancel($event)" (submitted)="submit($event)"></ccd-case-create>
+
+
+<ccd-case-create [jurisdiction]="jurisdictionId"
+                 [caseType]="caseTypeId"
+                 [event]="eventTriggerId"
+                 (cancelled)="cancel($event)"
+                 (submitted)="submit($event)">
+</ccd-case-create>
