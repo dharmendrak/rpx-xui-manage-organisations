@@ -15,7 +15,7 @@ router.use('/logout', auth.logout)
 // router.use('/user', userRouter)
 // router.use('/inviteUser', inviteUser)
 // router.use('/userList', getUserList)
-router.use('/data/internal/case-types/TestAddressBookCase/event-triggers/createCase?ignore-warning=false', dummyReturn)
+router.use('/data/internal/case-types/TestAddressBookCase/event-triggers/createCase', dummyReturn)
 router.use('/data/internal/profile', dummyReturnProfile)
 
 

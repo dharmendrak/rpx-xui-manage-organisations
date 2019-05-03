@@ -10,8 +10,8 @@ export const ROUTES: Routes = [
     path: '',
     component: OrganisationAccountsComponent,
     canActivate: [
-      AuthGuard,
-      AccountsGuard
+      // AuthGuard,
+      // AccountsGuard
     ],
     children: editorRouting
   },
