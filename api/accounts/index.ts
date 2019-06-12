@@ -60,6 +60,7 @@ export async function handleAccountRoute(req: EnhancedRequest, res: express.Resp
 }
 
 export async function handleAccountPbaTransactionsRoute(req: EnhancedRequest, res: express.Response) {
+  console.log('request is ' + req)
   const isValidPBA = await this.validatePBANumberForOrganisation(req, res)
 
   if (isValidPBA) {
