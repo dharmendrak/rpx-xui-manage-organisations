@@ -1,3 +1,4 @@
+import { UserInviteConfirmationComponent } from './components/user-invite-confirmation/user-invite-confirmation.component';
 // routes
 import { RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
@@ -13,8 +14,11 @@ export const ROUTES: Routes = [
     },
     {
       path: 'invite-user',
-      component: UserFormComponent,
       canActivate: [AuthGuard],
+      children: [
+        { path: '', component: UserFormComponent},
+        { path: 'invite-confirmation', component: UserInviteConfirmationComponent }
+      ]
     }
 ];
 

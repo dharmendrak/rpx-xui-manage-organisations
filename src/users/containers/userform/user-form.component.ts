@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import * as fromStore from '../../store';
 
 import {checkboxesBeCheckedValidator} from '../../../custom-validators/checkboxes-be-checked.validator';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 
 /*
 * User Form entry mediator component
@@ -15,11 +16,17 @@ import {Observable} from 'rxjs';
   selector: 'app-prd-user-form-component',
   templateUrl: './user-form.component.html',
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnDestroy {
 
-  constructor(private store: Store<fromStore.UserState>) { }
+  constructor(private store: Store<fromStore.UserState>, private router: Router) {
+    this.inviteSuccess$ = this.store.pipe(select(fromStore.InviteUserSuccess));
+
+    this.inviteSuccess$.subscribe(() => {
+      this.router.navigate(['/users/invite-user/invite-confirmation']);
+    });
+  }
   inviteUserForm: FormGroup;
-
+  inviteSuccess$: Observable<any>;
   formValidationErrors$: Observable<any>;
   formValidationErrorsArray$: Observable<{ isFromValid: boolean; items: { id: string; message: any; } []}>;
 
@@ -40,14 +47,11 @@ export class UserFormComponent implements OnInit {
       lastName: new FormControl('', Validators.required),
       emailAddress: new FormControl('', [Validators.email, Validators.required]),
       permissions: new FormGroup({
-        createCases: new FormControl(''),
-        viewCases: new FormControl(''),
+        manageCases: new FormControl(''),
         manageUsers: new FormControl(''),
-        viewDetails: new FormControl(''),
-        viewFees: new FormControl('')
+        manageOrganisations: new FormControl('')
       }, checkboxesBeCheckedValidator())
     });
-
   }
 
   // convenience getter for easy access to form fields
@@ -80,7 +84,9 @@ export class UserFormComponent implements OnInit {
 
 
   }
+  ngOnDestroy() {
 
+  }
 
 }
 
