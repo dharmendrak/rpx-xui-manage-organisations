@@ -50,6 +50,13 @@ export function reducer(
       };
     }
 
+    case fromInviteUsers.SEND_INVITE_USER: {
+      const inviteUserFormData  = action.payload;
+      return {
+        ...state,
+        inviteUserFormData
+      };
+    }
   }
 
   return state;

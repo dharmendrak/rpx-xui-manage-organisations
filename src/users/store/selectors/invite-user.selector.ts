@@ -7,7 +7,10 @@ export const getInviteUserState = createSelector(
   fromFeature.getRootUserState,
   (state: fromFeature.UserState) => state.inviteUser
 );
-
+export const getGetInviteUserSuccess = createSelector(
+  getInviteUserState,
+  fromInviteUsers.getInviteUserData
+);
 export const getGetInviteUserErrorMessage = createSelector(
   getInviteUserState,
   fromInviteUsers.getInviteUserErrorMessage
