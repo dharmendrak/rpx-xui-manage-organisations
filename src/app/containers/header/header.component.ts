@@ -1,10 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as fromAuth from '../../../auth/store';
+import * as fromAuth from '../../../user-profile/store';
 import * as fromRoot from '../../store';
-import {NavItemsModel} from '../../models/nav-items.model';
 import {AppTitlesModel} from '../../models/app-titles.model';
 import {UserNavModel} from '../../models/user-nav.model';
 
@@ -18,6 +17,8 @@ export class HeaderComponent implements OnInit {
   @Input() navItems: { active: boolean; href: string; }[];
   @Input() title: AppTitlesModel;
   @Input() userNav: UserNavModel;
+  @Output() navigate = new EventEmitter<string>();
+
 
   isUserLoggedIn$: Observable<boolean>;
 
@@ -40,5 +41,9 @@ export class HeaderComponent implements OnInit {
         active: item.href === url
       };
     });
+  }
+
+  onNavigate(event) {
+    this.navigate.emit(event);
   }
 }

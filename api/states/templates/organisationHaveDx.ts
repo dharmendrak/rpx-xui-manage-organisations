@@ -22,16 +22,16 @@ export default {
       fieldset: [
         {
           radios: {
-            control: 'haveDXNumber',
+            control: 'have',
             classes: 'govuk-radios--inline',
             radioGroup: [
               {
-                value: 'nextUrl',
+                value: 'yes',
                 text: 'Yes',
                 hiddenAccessibilityText: 'some hidden text',
               },
               {
-                value: 'dontHaveDX',
+                value: 'no',
                 text: 'No',
                 hiddenAccessibilityText: 'some hidden text'
               }
@@ -39,18 +39,6 @@ export default {
           }
         }
       ]
-    },
-    {
-      hiddenInput: {
-        control: 'nextUrl',
-        value: 'organisation-dx',
-      },
-    },
-    {
-      hiddenInput: {
-        control: 'dontHaveDX',
-        value: 'name',
-      },
     },
     {
       button: {

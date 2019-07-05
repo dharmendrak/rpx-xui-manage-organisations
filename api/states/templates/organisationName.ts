@@ -7,17 +7,11 @@ export default {
       {
         validationLevel: 'formControl',
         controlId: 'orgName',
-        text: 'Enter organisation name',
+        text: 'Enter Organisation name',
         href: '/register/organisation-name'
       }
     ],
     groups: [
-        {
-            hiddenInput: {
-                control: 'nextUrl',
-                value: 'organisation-address',
-            },
-        },
       {
         input: {
           label: {

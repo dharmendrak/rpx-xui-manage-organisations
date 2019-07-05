@@ -13,17 +13,11 @@ export default {
       {
         validationLevel: 'formControl',
         controlId: 'DXexchange',
-        text: 'EnterDX exchange',
+        text: 'Enter DX exchange',
         href: '/register/organisation-name'
       }
     ],
     groups: [
-        {
-            hiddenInput: {
-                control: 'nextUrl',
-                value: 'name',
-            },
-        },
         {
             input: {
                 label: {
@@ -52,12 +46,6 @@ export default {
                   controlId: 'DXexchange',
                 },
                 classes: 'govuk-!-width-two-thirds',
-            },
-        },
-        {
-            hiddenInput: {
-                control: 'nextUrl',
-                value: 'name',
             },
         },
         {

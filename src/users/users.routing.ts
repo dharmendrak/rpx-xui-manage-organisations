@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { UsersComponent } from './containers';
 import { UserFormComponent } from './containers/userform/user-form.component';
-import {AuthGuard} from '../auth/guards/auth.guard';
+import { AuthGuard } from '../user-profile/guards/auth.guard';
 
 export const ROUTES: Routes = [
     {
