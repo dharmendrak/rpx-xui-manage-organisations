@@ -62,7 +62,6 @@ app.use('/*', (req, res) => {
     console.timeEnd(`GET: ${req.originalUrl}`)
 })
 
-
 app.use('/api', routes)
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {

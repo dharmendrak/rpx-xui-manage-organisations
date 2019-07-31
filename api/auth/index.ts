@@ -51,6 +51,49 @@ export async function attach(req: EnhancedRequest, res: express.Response, next: 
     }
 }
 
+/**
+ * OAuth Post Options
+ *
+ * This object should be passed to Idam to retrieve the OAuth Token.
+ *
+ * @param authorization
+ * @returns
+ */
+export function oAuthPostOptions(authorization) {
+  return {
+    headers: {
+      Authorization: authorization,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  }
+}
+
+/**
+ * getIdamOAuthToken
+ *
+ * @param idamApiPath - 'xuiwebapp' - Should be config.services.idamApi
+ * @param idamClientName - 'xuiwebapp'
+ * @param idamSecret
+ * @param authorizationCode - req.query.code
+ * @param host - req.headers.host
+ * @param callbackUrl - config.oauthCallbackUrl
+ *
+ * @returns {Promise<void>}
+ */
+export async function getIdamOAuthToken(idamApiPath, idamClientName, idamSecret, authorizationCode, host, callbackUrl): Promise<AxiosResponse> {
+
+  const authorization = `Basic ${new Buffer(`${idamClientName}:${idamSecret}`).toString('base64')}`
+  const postOptions = oAuthPostOptions(authorization)
+
+  return http.post(
+    `${idamApiPath}/oauth2/token?grant_type=authorization_code&code=${authorizationCode}&redirect_uri=${
+      config.protocol
+      }://${host}${callbackUrl}`,
+    {},
+    postOptions
+  )
+}
+
 export async function getTokenFromCode(req: express.Request, res: express.Response): Promise<AxiosResponse> {
     console.log(`${config.idamClient}:${secret}`)
     const Authorization = `Basic ${new Buffer(`${config.idamClient}:${secret}`).toString('base64')}`
@@ -110,7 +153,17 @@ async function sessionChainCheck(req: EnhancedRequest, res: express.Response, ac
 }
 
 export async function oauth(req: EnhancedRequest, res: express.Response, next: express.NextFunction) {
-    const response = await getTokenFromCode(req, res)
+    // const response = await getTokenFromCode(req, res)
+
+    const idamApiPath = config.services.idamApi
+    const idamClientName = config.idamClient
+    const idamSecret = secret
+    const authorizationCode = req.query.code
+    const host = req.headers.host
+    const callbackUrl = config.oauthCallbackUrl
+
+    const response = await getIdamOAuthToken(idamApiPath, idamClientName, idamSecret, authorizationCode, host, callbackUrl)
+
     const accessToken = response.data.access_token
 
     if (accessToken) {
