@@ -10,8 +10,6 @@ export const router = express.Router({mergeParams: true})
 
 router.post('/register', async (req, res) => {
 
-  console.log('in /register')
-
   // TODO: Should be in common constants
   const ERROR_GENERATING_S2S_TOKEN = 'Error generating S2S Token'
 
@@ -19,12 +17,6 @@ router.post('/register', async (req, res) => {
   const rdProfessionalPath = config.services.rdProfessionalApi
 
   const registerPayload = makeOrganisationPayload(req.body.fromValues)
-
-  /**
-   * Check the payload comes in and is fine.
-   */
-  console.log('registerPayload')
-  // console.log(registerPayload)
 
   try {
 
@@ -40,7 +32,6 @@ router.post('/register', async (req, res) => {
      */
     req.headers.ServiceAuthorization = `Bearer ${s2sToken}`
     axios.defaults.headers.common.ServiceAuthorization = req.headers.ServiceAuthorization
-    console.log(s2sToken)
     const url = `${rdProfessionalPath}/refdata/internal/v1/organisations`
 
     const response = await http.post(url, registerPayload)
@@ -48,9 +39,6 @@ router.post('/register', async (req, res) => {
     res.send(response.data)
   } catch (error) {
 
-    // Temporary while we are debugging.
-    console.log('error')
-    console.log(error)
     /**
      * If there is a error generating the S2S token then we flag it to the UI.
      */
