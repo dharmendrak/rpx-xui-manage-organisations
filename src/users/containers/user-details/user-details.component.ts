@@ -20,6 +20,8 @@ export class UserDetailsComponent implements OnInit {
   userSubscription: Subscription;
   dependanciesSubscription: Subscription;
 
+  actionButtons: {name: string, class: string, action: any}[];
+
   constructor(
     private userStore: Store<fromStore.UserState>,
     private routerStore: Store<fromRoot.State>,
@@ -39,7 +41,21 @@ export class UserDetailsComponent implements OnInit {
       this.user$ = this.userStore.pipe(select(fromStore.getGetSingleUser, { userIdentifier: userId }));
     });
 
-    this.userSubscription = this.user$.subscribe((user) => this.user = user);
+    this.userSubscription = this.user$.subscribe((user) => {
+      this.user = user;
+
+      if (this.user && this.user.status === 'Active') {
+
+        this.actionButtons = [
+          {
+            name: 'Suspend access',
+            class: 'hmcts-menu__item hmcts-button--secondary hmcts-page-heading__action',
+            action: this.goToSuspendConfirmation
+          }
+        ];
+      }
+    });
+
 
   }
 
@@ -56,6 +72,10 @@ export class UserDetailsComponent implements OnInit {
 
   isSuspended(status) {
     return status === 'Suspended';
+  }
+
+  goToSuspendConfirmation() {
+    alert();
   }
 
 }

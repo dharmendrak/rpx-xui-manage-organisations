@@ -1,9 +1,10 @@
 <app-hmcts-main-wrapper
    [title]="'User details'"
    [backLink]="'/users'"
+   [actionButtons]="actionButtons"
 >
   <ng-container *ngIf="!(isLoading$ | async) else isLoading">
-    <div class="govuk-warning-text" *ngIf="isSuspended(user.status)">
+    <div class="govuk-warning-text" *ngIf="isSuspended(user?.status)">
       <span class="govuk-warning-text__icon">!</span>
       <strong class="govuk-warning-text__text">
         This user's account has been suspended.
@@ -29,7 +30,7 @@
       </tr>
       </tbody>
     </table>
-    <p class="govuk-body" *ngIf="isSuspended(user.status)">Contact <a href="mailto:service-desk@hmcts.gov.uk">service-desk@hmcts.gov.uk</a> to reactivate this account.</p>
+    <p class="govuk-body" *ngIf="isSuspended(user?.status)">Contact <a href="mailto:service-desk@hmcts.gov.uk">service-desk@hmcts.gov.uk</a> to reactivate this account.</p>
  
   </ng-container>
   <ng-template #isLoading>

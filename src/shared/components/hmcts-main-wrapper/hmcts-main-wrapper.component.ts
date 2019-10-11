@@ -23,6 +23,17 @@ import {Component, Input} from '@angular/core';
           <h1 *ngIf="title" class="govuk-heading-xl">{{title}}</h1>
           <ng-content></ng-content>
         </div>
+        <div class="govuk-grid-column-one-third" *ngIf="actionButtons?.length > 0">
+          <div class="hmcts-page-heading__actions-wrapper">
+            <a
+              *ngFor="let actionButton of actionButtons"
+              (click)="actionButton.action()"
+              role="button"
+              draggable="false"
+              class="govuk-button {{ actionButton.class }}"
+            >{{ actionButton.name }}</a>
+          </div>
+        </div>
       </div>
     </main>
   `
@@ -32,6 +43,7 @@ export class HmctsMainWrapperComponent  {
   @Input() backLink: string;
   @Input() title: string;
   @Input() summaryErrors: {isFromValid: boolean; items: { id: string; message: any; }[]};
+  @Input() actionButtons: {name: string, class: string, action: any}[];
 
   constructor() { }
 
