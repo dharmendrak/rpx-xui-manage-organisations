@@ -3,15 +3,13 @@ import { select, Store } from '@ngrx/store';
 import * as fromStore from '../../store';
 import * as fromRoot from '../../../app/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-prd-user-details-component',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss']
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent implements OnInit, OnDestroy {
 
   user$: Observable<any>;
   isLoading$: Observable<boolean>;
@@ -21,6 +19,8 @@ export class UserDetailsComponent implements OnInit {
   dependanciesSubscription: Subscription;
 
   actionButtons: {name: string, class: string, action: any}[];
+
+  suspendViewFlag: boolean = false;
 
   constructor(
     private userStore: Store<fromStore.UserState>,
@@ -48,9 +48,9 @@ export class UserDetailsComponent implements OnInit {
 
         this.actionButtons = [
           {
-            name: 'Suspend access',
-            class: 'hmcts-menu__item hmcts-button--secondary hmcts-page-heading__action',
-            action: this.goToSuspendConfirmation
+            name: 'Suspend account',
+            class: 'hmcts-button--secondary',
+            action: () => this.showSuspendView()
           }
         ];
       }
@@ -74,8 +74,12 @@ export class UserDetailsComponent implements OnInit {
     return status === 'Suspended';
   }
 
-  goToSuspendConfirmation() {
-    alert();
+  isSuspendView() {
+    return this.suspendViewFlag;
+  }
+
+  showSuspendView() {
+    this.suspendViewFlag = true;
   }
 
 }
