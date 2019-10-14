@@ -41,7 +41,7 @@
 
 <app-hmcts-main-wrapper
    [title]="'Are you sure you want to suspend this account?'"
-   [backLink]="'/users/user' + user.userIdentifier"
+   [backAction]="hideSuspendView"
    *ngIf="isSuspendView()"
 >
   <ng-container>

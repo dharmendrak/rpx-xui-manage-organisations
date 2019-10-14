@@ -18,9 +18,12 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   dependanciesSubscription: Subscription;
 
-  actionButtons: {name: string, class: string, action: any}[];
+  actionButtons: {name: string, class: string, action: () => {}}[];
 
   suspendViewFlag: boolean = false;
+
+  showSuspendView: () => {};
+  hideSuspendView: () => {};
 
   constructor(
     private userStore: Store<fromStore.UserState>,
@@ -50,12 +53,16 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
           {
             name: 'Suspend account',
             class: 'hmcts-button--secondary',
-            action: () => this.showSuspendView()
+            action: this.showSuspendView
           }
         ];
       }
     });
 
+
+    this.hideSuspendView = () => this.suspendViewFlag = false;
+
+    this.showSuspendView = () => this.suspendViewFlag = true;
 
   }
 
@@ -78,9 +85,4 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     return this.suspendViewFlag;
   }
 
-  showSuspendView() {
-    this.suspendViewFlag = true;
-  }
-
 }
-
