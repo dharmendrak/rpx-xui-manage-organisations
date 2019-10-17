@@ -18,7 +18,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   dependanciesSubscription: Subscription;
 
-  actionButtons: {name: string, class: string, action: () => {}}[];
+  actionButtons: { name: string, class: string, action: () => {} }[] = [];
 
   suspendViewFlag: boolean = false;
 
@@ -31,39 +31,57 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.user$ = new Observable();
+    this.setSuspendViewFunctions();
+
     this.isLoading$ = this.userStore.pipe(select(fromStore.getGetUserLoading));
 
-    this.dependanciesSubscription = combineLatest([
-      this.routerStore.pipe(select(fromRoot.getRouterState)),
-      this.userStore.pipe(select(fromStore.getGetUserLoaded))
-    ]).subscribe(([route, users]) => {
-      if (!users) {
-        this.userStore.dispatch(new fromStore.LoadUsers());
-      }
-      const userId = route.state.params.userId;
-      this.user$ = this.userStore.pipe(select(fromStore.getGetSingleUser, { userIdentifier: userId }));
+    this.dependanciesSubscription = this.getDependancyObservables(this.userStore, this.routerStore).subscribe(([route, users]) => {
+      this.handleDependanciesSubscription(users, route);
     });
 
-    this.userSubscription = this.user$.subscribe((user) => {
-      this.user = user;
+    this.userSubscription = this.user$.subscribe((user) => this.handleUserSubscription(user));
+  }
 
-      if (this.user && this.user.status === 'Active') {
+  getDependancyObservables(routerStore: Store<fromStore.UserState>, userStore: Store<fromRoot.State>) {
+    return combineLatest([
+      routerStore.pipe(select(fromRoot.getRouterState)),
+      userStore.pipe(select(fromStore.getGetUserLoaded))
+    ]);
+  }
 
-        this.actionButtons = [
-          {
-            name: 'Suspend account',
-            class: 'hmcts-button--secondary',
-            action: this.showSuspendView
-          }
-        ];
-      }
-    });
+  dispatchGetUsers(users, userStore) {
+    if (!users) {
+      userStore.dispatch(new fromStore.LoadUsers());
+    }
+  }
 
+  getUserObservable(userId, userStore) {
+    return userStore.pipe(select(fromStore.getGetSingleUser, { userIdentifier: userId }));
+  }
 
+  setSuspendViewFunctions() {
     this.hideSuspendView = () => this.suspendViewFlag = false;
-
     this.showSuspendView = () => this.suspendViewFlag = true;
+  }
 
+  handleUserSubscription(user) {
+    this.user = user;
+    if (this.user && this.user.status === 'Active') {
+
+      this.actionButtons = [
+        {
+          name: 'Suspend account',
+          class: 'hmcts-button--secondary',
+          action: this.showSuspendView
+        }
+      ];
+    }
+  }
+
+  handleDependanciesSubscription(users, route) {
+    this.dispatchGetUsers(users, this.userStore);
+    this.user$ = this.getUserObservable(route.state.params.userId, this.userStore);
   }
 
   ngOnDestroy() {
