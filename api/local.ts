@@ -7,6 +7,7 @@ import * as cookieParser from 'cookie-parser'
 import * as express from 'express'
 import * as session from 'express-session'
 import * as sessionFileStore from 'session-file-store'
+import * as socketio from 'socket.io'
 import * as auth from './auth'
 import {appInsights} from './lib/appInsights'
 import {config} from './lib/config'
@@ -17,8 +18,9 @@ import routes from './routes'
 /**
  * Only used Locally
  */
-import * as tunnel from './lib/tunnel'
+import * as http from 'http'
 import * as log4js from 'log4js'
+import * as tunnel from './lib/tunnel'
 
 const FileStore = sessionFileStore(session)
 
@@ -41,15 +43,20 @@ app.use(
   })
 )
 
+const httServer = http.createServer(app)
+const io = socketio(httServer)
+io.on('connection', function (socket) {
+  console.log('socket new connection1')
+  io.emit('this', { will: 'be received by everyone'})
+  console.log('socket new connection2')
+})
+io.emit('this', { will: 'be received by everyone'})
 /**
  * Used Client side
  */
 if (config.proxy) {
   tunnel.init()
 }
-
-
-
 
 /**
  * Common to both server.ts and local.ts files
@@ -89,7 +96,7 @@ app.get('/api/logout', (req, res, next) => {
 })
 
 const port = process.env.PORT || 3001
-app.listen(port)
+httServer.listen(port)
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   config.appInsightsInstrumentationKey = process.env.APPINSIGHTS_INSTRUMENTATIONKEY
