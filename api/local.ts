@@ -45,21 +45,23 @@ app.use(
 
 const httServer = http.createServer(app)
 const io = socketio(httServer)
+
+
 io.on('connection', socket => {
   socket.emit('newMessage', { hello: 'world'});
 
+  socket.on('clientMessage', data => {
+    console.log('HELLOO', data);
+  });
 
   console.log('socket new connection1')
   io.emit('newMessage', { will: 'be received by everyone HNALDER'})
   console.log('socket new connection2')
 
-
-
+  // THIS will emit to ALL connected clients - it was previously being fired too early, there were no connected clients
+  io.sockets.emit('newMessage', { will: 'be received by everyone GLOBAL'})
 })
 
-io.on('sendMessage', data => {
-  console.log('HELLOO', data);
-});
 
 
 /**

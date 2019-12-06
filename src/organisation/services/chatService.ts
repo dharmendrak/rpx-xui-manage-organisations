@@ -12,7 +12,7 @@ export class ChatService {
 
   // EMITTER
   sendMessage(msg: string) {
-    this.socket.emit('sendMessage', { message: msg });
+    this.socket.emit('clientMessage', { message: msg });
   }
 
   // HANDLER
