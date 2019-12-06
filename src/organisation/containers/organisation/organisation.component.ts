@@ -25,7 +25,7 @@ export class OrganisationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.chatService.onNewMessage().subscribe(msg => {
-      console.log('got a msg: ' + msg);
+      console.log('got a msg: ', msg);
     });
     this.organisationSubscription = this.store.pipe(select(fromStore.getOrganisationSel)).subscribe(( data) => {
       this.orgData = data;

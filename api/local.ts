@@ -45,12 +45,23 @@ app.use(
 
 const httServer = http.createServer(app)
 const io = socketio(httServer)
-io.on('connection', function (socket) {
+io.on('connection', socket => {
+  socket.emit('newMessage', { hello: 'world'});
+
+
   console.log('socket new connection1')
-  io.emit('this', { will: 'be received by everyone'})
+  io.emit('newMessage', { will: 'be received by everyone HNALDER'})
   console.log('socket new connection2')
+
+
+
 })
-io.emit('this', { will: 'be received by everyone'})
+
+io.on('sendMessage', data => {
+  console.log('HELLOO', data);
+});
+
+
 /**
  * Used Client side
  */
