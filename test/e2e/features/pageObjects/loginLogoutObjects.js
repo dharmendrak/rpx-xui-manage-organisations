@@ -20,8 +20,8 @@ function loginLogoutObjects() {
   };
 
   this.givenIAmUnauthenticatedUser = async function () {
-    await this.enterUrEmail("test@gmail.com");
-    await this.enterPassword("123");
+    await this.enterUrEmail("test_invalid_user@gmail.com");
+    await this.enterPassword("invalidpassword");
     await this.clickSignIn();
   };
 

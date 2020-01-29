@@ -1,4 +1,9 @@
 
+function getEnvSuperUserEmail() {
+    return process.env.TEST_URL.includes('aat') || process.env.TEST_URL.includes('localhost') ?
+        'lukesuperuserxui@mailnesia.com' : 'peterxuisuperuser@mailnesia.com';
+}
+
 const jenkinsConfig = [
 
     {
@@ -15,7 +20,7 @@ const localConfig = [
         browserName: 'chrome',
         acceptInsecureCerts: true,
         unexpectedAlertBehaviour: 'accept',
-        chromeOptions: { args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-zygote ', '--disable-notifications'] },
+        chromeOptions: { args: ['--headless1', '--no-sandbox', '--disable-dev-shm-usage', '--disable-setuid-sandbox', '--no-zygote ', '--disable-notifications'] },
         proxy: {
             proxyType: 'manual',
             httpProxy: 'proxyout.reform.hmcts.net:8080',
@@ -28,12 +33,14 @@ const localConfig = [
 const config = {
     config : {
         baseUrl: process.env.TEST_URL || 'http://localhost:3000/' ,
-        username: process.env.TEST_EMAIL || 'lukesuperuserxui@mailnesia.com',
+        username: process.env.TEST_EMAIL || getEnvSuperUserEmail(),
         password: process.env.TEST_PASSWORD || 'Monday01'
     },
     twoFactorAuthEnabled: false
     
 };
+
+
 
 const cucumberOpts = [
     '../support/timeout.js',
