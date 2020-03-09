@@ -1,5 +1,4 @@
 {
-    "environment": "DEFAULT ENVIRONMENT",
     "appInsightsInstrumentationKey": "APPINSIGHTS_INSTRUMENTATIONKEY",
     "cookies": {
         "token": "COOKIE_TOKEN",
@@ -53,5 +52,12 @@
         "__name": "FEATURE_TERMS_AND_CONDITIONS_ENABLED",
         "__format": "json"
       }
+    },
+    "environment": {
+      "isTerraformEnvironment": {
+        "__name": "IS_TERRAFORM_ENVIRONMENT",
+        "__format": "json"
+      },
+      "hostEnvironment": "HOST_ENVIRONMENT"
     }
 }

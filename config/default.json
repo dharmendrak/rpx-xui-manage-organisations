@@ -1,5 +1,4 @@
 {
-    "environment": "DEFAULT ENVIRONMENT",
     "appInsightsInstrumentationKey": "",
     "cookies": {
         "token": "__auth__",
@@ -26,5 +25,9 @@
       "proxyEnabled": false,
       "secureCookieEnabled": true,
       "termsAndConditionsEnabled": false
+    },
+    "environment": {
+      "isTerraformEnvironment": false,
+      "hostEnvironment": "production"
     }
 }

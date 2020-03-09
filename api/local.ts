@@ -8,12 +8,21 @@ import * as session from 'express-session'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
 import * as auth from './auth'
-import {environmentCheckText, getConfigValue, getEnvironment, initialiseSecrets, showFeature} from './configuration'
+import {
+  environmentCheckText,
+  getConfigValue,
+  getEnvironment,
+  getEnvironmentConfigValue,
+  initialiseSecrets,
+  showFeature
+} from './configuration'
 import {ERROR_NODE_CONFIG_ENV} from './configuration/constants'
 import {
   APP_INSIGHTS_KEY,
   COOKIE_TOKEN,
   COOKIES_USERID,
+  ENVIRONMENT_HOST_ENV,
+  ENVIRONMENT_IS_TERRAFORM_ENV,
   FEATURE_APP_INSIGHTS_ENABLED,
   FEATURE_PROXY_ENABLED,
   FEATURE_SECURE_COOKIE_ENABLED,
@@ -115,6 +124,10 @@ console.log('Proxy enabled:')
 console.log(showFeature(FEATURE_PROXY_ENABLED))
 console.log('Terms and Conditions enabled:')
 console.log(showFeature(FEATURE_TERMS_AND_CONDITIONS_ENABLED))
+console.log('Environment, is Terraform environment:')
+console.log(getEnvironmentConfigValue(ENVIRONMENT_IS_TERRAFORM_ENV))
+console.log('Environment, host environment:')
+console.log(getEnvironmentConfigValue(ENVIRONMENT_HOST_ENV))
 
 app.use(
   session({
@@ -187,6 +200,9 @@ app.get('/external/ping', (req, res) => {
     featureAppInsightEnabled: showFeature(FEATURE_APP_INSIGHTS_ENABLED),
     featureProxyEnabled: showFeature(FEATURE_PROXY_ENABLED),
     featureTermsAndConditionsEnabled: showFeature(FEATURE_TERMS_AND_CONDITIONS_ENABLED),
+    // 6th set
+    environmentIsTerraformEnv: getEnvironmentConfigValue(ENVIRONMENT_IS_TERRAFORM_ENV),
+    environmentHostEnv: getEnvironmentConfigValue(ENVIRONMENT_HOST_ENV),
   })
 })
 app.use('/external', openRoutes)

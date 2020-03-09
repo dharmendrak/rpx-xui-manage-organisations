@@ -2,7 +2,7 @@ import * as propertiesVolume from '@hmcts/properties-volume'
 import * as config from 'config'
 import { propsExist } from '../lib/objectUtilities'
 import {DEVELOPMENT, HTTP} from './constants'
-import {ENVIRONMENT, PROTOCOL} from './references'
+import { PROTOCOL} from './references'
 
 /**
  * If you are running locally you might need to set the mountPoint up as documented in the readme.
@@ -55,12 +55,27 @@ export const hasConfigValue = reference => config.has(reference)
 export const showFeature = feature => config.get(`feature.${feature}`)
 
 /**
+ * get Environment Config Value
+ *
+ * This can be used to access the environment configuration values.
+ *
+ * Example: 'isTerraformEnvironment' will return if this is an environment where
+ * we are using terraform files ie. an ASE environment.
+ *
+ * 'hostEnvironment' will return what the host environment is set as ie. 'ithc', 'aat'.
+ *
+ * @see values.yaml
+ * @param reference
+ */
+export const getEnvironmentConfigValue = reference => config.get(`environment.${reference}`)
+
+/**
  * Generate Environment Check Text
  *
  * We generate text to be used for debugging purposes, so as the person attempting to initialise the application knows
  * what the NODE_CONFIG_ENV is set as and what config file is being used.
  */
-export const environmentCheckText = () => `NODE_CONFIG_ENV is set as ${process.env.NODE_CONFIG_ENV} therefore we are using the ${config.get(ENVIRONMENT)} config.`
+export const environmentCheckText = () => `NODE_CONFIG_ENV is set as ${process.env.NODE_CONFIG_ENV} therefore we are using the default config.`
 
 /**
  * Get Protocol

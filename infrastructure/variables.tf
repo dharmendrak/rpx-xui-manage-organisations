@@ -133,6 +133,12 @@ variable "terraform_test" {
   default = "tf test var to web app"
 }
 
+variable "is_terraform_environment" {
+  default = "true"
+}
+
+variable "host_environment" {}
+
 variable "node_config_dir" {
   // for Windows
   default = "D:\\home\\site\\wwwroot\\config"

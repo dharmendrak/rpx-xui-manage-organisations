@@ -13,8 +13,6 @@ export const APP_INSIGHTS_KEY = 'secrets.rpx.AppInsightsInstrumentationKey'
 export const S2S_SECRET = 'secrets.rpx.mo-s2s-client-secret'
 export const IDAM_SECRET = 'secrets.rpx.xui-oauth2-token'
 
-export const ENVIRONMENT = 'environment'
-
 export const COOKIE_TOKEN = 'cookies.token'
 export const COOKIES_USERID = 'cookies.userId'
 
@@ -47,3 +45,6 @@ export const FEATURE_SECURE_COOKIE_ENABLED = 'secureCookieEnabled'
 export const FEATURE_APP_INSIGHTS_ENABLED = 'appInsightsEnabled'
 export const FEATURE_PROXY_ENABLED = 'proxyEnabled'
 export const FEATURE_TERMS_AND_CONDITIONS_ENABLED = 'termsAndConditionsEnabled'
+
+export const ENVIRONMENT_IS_TERRAFORM_ENV = 'isTerraformEnvironment'
+export const ENVIRONMENT_HOST_ENV = 'hostEnvironment'

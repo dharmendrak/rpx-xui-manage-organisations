@@ -75,6 +75,10 @@ module "app" {
         FEE_AND_PAY_API = "${var.fee_and_pay_api}"
 
         TERRAFORM_TEST = "${var.terraform_test}"
+
+        # ENVIRONMENT
+        HOST_ENVIRONMENT = "${var.host_environment}"
+        IS_TERRAFORM_ENVIRONMENT = "${var.is_terraform_environment}"
     }
 }
 
