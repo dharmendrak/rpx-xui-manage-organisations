@@ -70,6 +70,7 @@ module "app" {
         CCD_DEFINITION_API_SERVICE = "${var.ccd_definition_api_service}"
         IDAM_API_SERVICE = "${var.idam_api_service}"
         IDAM_WEB_SERVICE = "${var.idam_web_service}"
+        IDAM_WEB_SERVICE_AKS = "${var.idam_web_service_aks}"
         RD_PROFESSIONAL_API_SERVICE = "${var.rd_professional_api_service}"
         S2S_SERVICE = "${var.s2s_service}"
         FEE_AND_PAY_API = "${var.fee_and_pay_api}"

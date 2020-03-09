@@ -29,6 +29,8 @@ export const PROTOCOL = 'protocol'
 
 export const SERVICES_IDAM_API_PATH = 'services.idamApi'
 export const SERVICES_IDAM_WEB = 'services.idamWeb'
+export const SERVICES_IDAM_WEB_AKS = 'services.idamWebAks'
+
 export const SERVICE_S2S_PATH = 'services.s2s'
 export const SERVICES_RD_PROFESSIONAL_API_PATH = 'services.rdProfessionalApi'
 export const SERVICES_FEE_AND_PAY_API_PATH = 'services.feeAndPayApi'

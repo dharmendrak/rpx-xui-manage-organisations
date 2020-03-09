@@ -13,6 +13,7 @@
     "services": {
         "idamApi": "https://idam-api.platform.hmcts.net",
         "idamWeb": "https://hmcts-access.service.gov.uk",
+        "idamWebAks": " https://idam-web-public-aks.ithc.platform.hmcts.net",
         "rdProfessionalApi": "http://rd-professional-api-prod.service.core-compute-prod.internal",
         "s2s": "http://rpe-service-auth-provider-prod.service.core-compute-prod.internal",
         "feeAndPayApi": "https://payment-api-prod.service.core-compute-prod.internal",

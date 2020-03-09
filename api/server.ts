@@ -7,7 +7,7 @@ import * as express from 'express'
 import * as session from 'express-session'
 import * as sessionFileStore from 'session-file-store'
 import * as auth from './auth'
-import {environmentCheckText, getConfigValue, getEnvironment, getEnvironmentConfigValue, initialiseSecrets, showFeature} from './configuration'
+import {environmentCheckText, getConfigValue, getEnvironment, getEnvironmentConfigValue, getIdamApiService, initialiseSecrets, showFeature} from './configuration'
 import {ERROR_NODE_CONFIG_ENV} from './configuration/constants'
 import {
   APP_INSIGHTS_KEY,
@@ -124,6 +124,12 @@ console.log(getEnvironmentConfigValue(ENVIRONMENT_IS_TERRAFORM_ENV))
 console.log('Environment, host environment:')
 console.log(getEnvironmentConfigValue(ENVIRONMENT_HOST_ENV))
 
+const isTerraformEnvironment = getEnvironmentConfigValue(ENVIRONMENT_IS_TERRAFORM_ENV)
+const environmentHost = getEnvironmentConfigValue(ENVIRONMENT_HOST_ENV)
+
+console.log('Idam Web Service path this application is using:')
+console.log(getIdamApiService(isTerraformEnvironment, environmentHost))
+
 app.use(
     session({
         cookie: {
@@ -209,6 +215,7 @@ app.get('/external/ping', (req, res) => {
     // 6th set
     environmentIsTerraformEnv: getEnvironmentConfigValue(ENVIRONMENT_IS_TERRAFORM_ENV),
     environmentHostEnv: getEnvironmentConfigValue(ENVIRONMENT_HOST_ENV),
+    idamWebServiceToUse: getIdamApiService(isTerraformEnvironment, environmentHost),
   })
 })
 app.use('/external', openRoutes)

@@ -38,8 +38,14 @@ nodejs:
     FEATURE_TERMS_AND_CONDITIONS_ENABLED: false
 
     # Idam Urls
-    IDAM_API_SERVICE: https://idam-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
-    IDAM_WEB_SERVICE: https://idam-web-public-aks.{{ .Values.global.environment }}.platform.hmcts.net
+    IDAM_API_SERVICE: https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net
+    IDAM_WEB_SERVICE: https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net
+
+    # Idam Web Service Url for AKS
+    IDAM_WEB_SERVICE_AKS: https://idam-web-public-aks.{{ .Values.global.environment }}.platform.hmcts.net
+
+    # Idam Api Service Url
+    IDAM_API_SERVICE_INTERNAL: https://idam-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
 
     # Service Urls
     RD_PROFESSIONAL_API_SERVICE: http://rd-professional-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal

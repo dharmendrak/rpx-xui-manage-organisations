@@ -2,7 +2,7 @@ import * as propertiesVolume from '@hmcts/properties-volume'
 import * as config from 'config'
 import { propsExist } from '../lib/objectUtilities'
 import {DEVELOPMENT, HTTP} from './constants'
-import { PROTOCOL} from './references'
+import { PROTOCOL, SERVICES_IDAM_WEB, SERVICES_IDAM_WEB_AKS } from './references'
 
 /**
  * If you are running locally you might need to set the mountPoint up as documented in the readme.
@@ -17,6 +17,27 @@ import { PROTOCOL} from './references'
 export const initialiseSecrets = () => {
   propertiesVolume.addTo(config)
   // propertiesVolume.addTo(config, { mountPoint: '/Volumes/mnt/secrets/'})
+}
+
+/**
+ * get Idam Api Service
+ *
+ * If we are on an ASE or AKS environment then we should use the following url:
+ * https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net.
+ *
+ * If we are on AKS-ITHC environment then we should use the following url:
+ * https://idam-web-public-aks.{{ .Values.global.environment }}.platform.hmcts.net
+ *
+ * @param isTerraformEnvironment - 'true' is running on a Terraform environment ie. ASE.
+ * @param environmentHost - 'aat' / 'ithc' etc. dependent on environment. (TODO: Needs to be tested)
+ */
+export const getIdamApiService = (isTerraformEnvironment, environmentHost) => {
+  const ITHC = 'ithc'
+  if (!isTerraformEnvironment && environmentHost === ITHC) {
+    return getConfigValue(SERVICES_IDAM_WEB_AKS)
+  } else {
+    return getConfigValue(SERVICES_IDAM_WEB)
+  }
 }
 
 /**

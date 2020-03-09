@@ -101,6 +101,7 @@ variable "ccd_data_api_service" {}
 variable "ccd_definition_api_service" {}
 variable "idam_api_service" {}
 variable "idam_web_service" {}
+variable "idam_web_service_aks" {}
 variable "rd_professional_api_service" {}
 variable "s2s_service" {}
 variable "fee_and_pay_api" {}

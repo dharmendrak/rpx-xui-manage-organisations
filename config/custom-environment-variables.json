@@ -18,6 +18,7 @@
     "services": {
         "idamApi": "IDAM_API_SERVICE",
         "idamWeb": "IDAM_WEB_SERVICE",
+        "idamWebAks": "IDAM_WEB_SERVICE_AKS",
         "rdProfessionalApi": "RD_PROFESSIONAL_API_SERVICE",
         "s2s": "S2S_SERVICE",
         "feeAndPayApi": "FEE_AND_PAY_API",
