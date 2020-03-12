@@ -9,9 +9,9 @@
  * This file should be representative of the .yaml files in /config, and not
  * contain any additional constants. They are grouped as a representation of the .yaml structure.
  */
-export const APP_INSIGHTS_KEY = 'secrets.rpx.AppInsightsInstrumentationKey'
-export const S2S_SECRET = 'secrets.rpx.mo-s2s-client-secret'
-export const IDAM_SECRET = 'secrets.rpx.xui-oauth2-token'
+
+export const LOGGING = 'logging'
+export const JURISDICTIONS = 'jurisdictions'
 
 export const COOKIE_TOKEN = 'cookies.token'
 export const COOKIES_USERID = 'cookies.userId'
@@ -26,6 +26,9 @@ export const NOW = 'now'
 export const OAUTH_CALLBACK_URL = 'oauthCallbackUrl'
 export const PROTOCOL = 'protocol'
 
+/**
+ * 3rd party services
+ */
 export const SERVICES_IDAM_API_PATH = 'services.idamApi'
 export const SERVICES_IDAM_WEB = 'services.idamWeb'
 export const SERVICE_S2S_PATH = 'services.s2s'
@@ -34,16 +37,33 @@ export const SERVICES_FEE_AND_PAY_API_PATH = 'services.feeAndPayApi'
 export const SERVICES_TERMS_AND_CONDITIONS_API_PATH = 'services.termsAndConditions'
 
 export const SESSION_SECRET = 'sessionSecret'
+
+/**
+ * Proxy only for local development
+ */
 export const PROXY_HOST = 'proxyConfig.host'
 export const PROXY_PORT = 'proxyConfig.port'
 
-export const LOGGING = 'logging'
-export const JURISDICTIONS = 'jurisdictions'
+/**
+ * Secrets
+ */
+export const APP_INSIGHTS_KEY = 'secrets.rpx.AppInsightsInstrumentationKey'
+export const S2S_SECRET = 'secrets.rpx.mo-s2s-client-secret'
+export const IDAM_SECRET = 'secrets.rpx.xui-oauth2-token'
 
-export const HELMET = 'helmet'
+/**
+ * Alternative Secrets Mount
+ */
+export const ALT_SECRETS_MOUNT = 'altSecretsMount'
 
 export const FEATURE_SECURE_COOKIE_ENABLED = 'secureCookieEnabled'
 export const FEATURE_APP_INSIGHTS_ENABLED = 'appInsightsEnabled'
 export const FEATURE_PROXY_ENABLED = 'proxyEnabled'
 export const FEATURE_TERMS_AND_CONDITIONS_ENABLED = 'termsAndConditionsEnabled'
 export const FEATURE_HELMET_ENABLED = 'helmetEnabled'
+export const FEATURE_ALT_SECRETS_MOUNT_ENABLED = 'altSecretsMountEnabled'
+
+/**
+ * Security
+ */
+export const HELMET = 'helmet'

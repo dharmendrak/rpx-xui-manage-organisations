@@ -133,6 +133,10 @@ variable "feature_helmet_enabled" {
   default = "false"
 }
 
+variable "feature_alt_secrets_mount_enabled" {
+  default = "false"
+}
+
 variable "terraform_test" {
   default = "tf test var to web app"
 }

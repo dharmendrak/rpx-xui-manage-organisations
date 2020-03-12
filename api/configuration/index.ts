@@ -1,8 +1,6 @@
 import * as propertiesVolume from '@hmcts/properties-volume'
 import * as config from 'config'
-import { propsExist } from '../lib/objectUtilities'
-import {DEVELOPMENT, HTTP} from './constants'
-import {ENVIRONMENT, PROTOCOL} from './references'
+import {ALT_SECRETS_MOUNT, FEATURE_ALT_SECRETS_MOUNT_ENABLED, PROTOCOL} from './references'
 
 /**
  * If you are running locally you might need to set the mountPoint up as documented in the readme.
@@ -15,20 +13,24 @@ import {ENVIRONMENT, PROTOCOL} from './references'
  * @see https://github.com/lorenwest/node-config/wiki/Environment-Variables
  */
 export const initialiseSecrets = () => {
+
+  if (useAlternativeSecretsMount()) {
+    propertiesVolume.addTo(config, { mountPoint: getConfigValue(ALT_SECRETS_MOUNT)})
+    return
+  }
+
   propertiesVolume.addTo(config)
-  // propertiesVolume.addTo(config, { mountPoint: '/Volumes/mnt/secrets/'})
 }
 
 /**
- * Get Environment
+ * Use Alternative Secrets Mount Point
  *
- * See Readme for more information on how the configuration file is set.
- * 'Environmental Variables Setup & Error Handling'
+ * Set the FEATURE_ALT_SECRETS_MOUNT_ENABLED to true using the .env file to set up
+ * the application so that it uses an alternative mount point set by ALT_SECRETS_MOUNT.
  *
- * @see Readme
- * @returns {string} ie. - development / preview / aat / ithc, prod
+ * @returns {any}
  */
-export const getEnvironment = () => process.env.NODE_CONFIG_ENV
+export const useAlternativeSecretsMount = () => showFeature(FEATURE_ALT_SECRETS_MOUNT_ENABLED)
 
 /**
  * Get Configuration Value
@@ -42,6 +44,11 @@ export const getEnvironment = () => process.env.NODE_CONFIG_ENV
  */
 export const getConfigValue = reference => config.get(reference)
 
+/**
+ * Has Configuration Value
+ *
+ * @param reference
+ */
 export const hasConfigValue = reference => config.has(reference)
 
 /**
@@ -55,18 +62,8 @@ export const hasConfigValue = reference => config.has(reference)
 export const showFeature = feature => config.get(`feature.${feature}`)
 
 /**
- * Generate Environment Check Text
- *
- * We generate text to be used for debugging purposes, so as the person attempting to initialise the application knows
- * what the NODE_CONFIG_ENV is set as and what config file is being used.
- */
-export const environmentCheckText = () => `NODE_CONFIG_ENV is set as ${process.env.NODE_CONFIG_ENV} therefore we are using the ${config.get(ENVIRONMENT)} config.`
-
-/**
  * Get Protocol
  *
- * If running locally we return 'http'
- *
- * @returns {string | string}
+ * @returns http / https
  */
-export const getProtocol = () => getEnvironment() === DEVELOPMENT ? HTTP : getConfigValue(PROTOCOL)
+export const getProtocol = () => getConfigValue(PROTOCOL)

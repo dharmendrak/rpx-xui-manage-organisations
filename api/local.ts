@@ -1,6 +1,3 @@
-/**
- * Common to both server.ts and local.ts files
- */
 import * as bodyParser from 'body-parser'
 import * as cookieParser from 'cookie-parser'
 import * as express from 'express'
@@ -9,8 +6,7 @@ import * as helmet from 'helmet'
 import * as log4js from 'log4js'
 import * as sessionFileStore from 'session-file-store'
 import * as auth from './auth'
-import {environmentCheckText, getConfigValue, getEnvironment, initialiseSecrets, showFeature} from './configuration'
-import {ERROR_NODE_CONFIG_ENV} from './configuration/constants'
+import {getConfigValue, initialiseSecrets, showFeature} from './configuration'
 import {
   APP_INSIGHTS_KEY,
   COOKIE_TOKEN,
@@ -58,19 +54,6 @@ const app = express()
  * Allows us to integrate the Azure key-vault flex volume, so that we are able to access Node configuration values.
  */
 initialiseSecrets()
-
-/**
- * If there are no configuration properties found we highlight this to the person attempting to initialise
- * this application.
- */
-if (!getEnvironment()) {
-  console.log(ERROR_NODE_CONFIG_ENV)
-}
-
-/**
- * TODO: Implement a logger on the Node layer.
- */
-console.log(environmentCheckText())
 
 // TODO: Testing that we can get the environment variables on AAT from the .yaml file
 console.log('ENV PRINT')
@@ -145,7 +128,7 @@ app.use(
 )
 
 /**
- * Used Client side
+ * Tunnel should only be used Client side
  */
 
 tunnel.init()
@@ -205,12 +188,6 @@ app.get('/health', (req, res) => {
   console.log('Health endpoint hit')
   res.send('Healthy')
 })
-
-console.log('WE ARE USING local.ts on the box.')
-/**
- * We are attaching authentication to all subsequent routes.
- */
-// app.use(auth.attach) // its called in routes.ts - no need to call it here
 
 /**
  * Secure Routes

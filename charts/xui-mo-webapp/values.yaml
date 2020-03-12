@@ -35,7 +35,8 @@ nodejs:
     PROXY_HOST: 172.16.0.7
     PROXY_PORT: 0
 
-    # ALLOW_CONFIG_MUTATIONS: Required for Secrets to attach to configuration object within code
+    # ALLOW_CONFIG_MUTATIONS should equal true on the environment otherwise HMCTS Properties
+    # Volume will not be able to merge the volume secrets into the Node config object.
     ALLOW_CONFIG_MUTATIONS: 1
 
     # Feature Toggles
@@ -44,6 +45,7 @@ nodejs:
     FEATURE_PROXY_ENABLED: false
     FEATURE_TERMS_AND_CONDITIONS_ENABLED: false
     FEATURE_HELMET_ENABLED: true
+    FEATURE_ALT_SECRETS_MOUNT_ENABLED: false
 
     # Idam
     IDAM_CLIENT: xuimowebapp
@@ -64,6 +66,7 @@ nodejs:
         - mo-s2s-client-secret
         - xui-oauth2-token
         - AppInsightsInstrumentationKey
+
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}

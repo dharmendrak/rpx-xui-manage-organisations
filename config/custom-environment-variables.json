@@ -35,6 +35,7 @@
         "xui-oauth2-token": "IDAM_SECRET"
       }
     },
+    "altSecretsMount" : "ALT_SECRETS_MOUNT",
     "feature": {
       "appInsightsEnabled": {
         "__name": "FEATURE_APP_INSIGHTS_ENABLED",
@@ -54,6 +55,10 @@
       },
       "helmetEnabled": {
         "__name": "FEATURE_HELMET_ENABLED",
+        "__format": "json"
+      },
+      "altSecretsMountEnabled": {
+        "__name": "FEATURE_ALT_SECRETS_MOUNT_ENABLED",
         "__format": "json"
       }
     }

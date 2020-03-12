@@ -60,6 +60,7 @@ module "app" {
         FEATURE_PROXY_ENABLED = "${var.feature_proxy_enabled}"
         FEATURE_TERMS_AND_CONDITIONS_ENABLED = "${var.feature_terms_and_conditions_enabled}"
         FEATURE_HELMET_ENABLED = "${var.feature_helmet_enabled}"
+        FEATURE_ALT_SECRETS_MOUNT_ENABLED = "${var.feature_alt_secrets_mount_enabled}"
 
         # COOKIE SETTINGS
         COOKIE_TOKEN = "${var.cookie_token}"

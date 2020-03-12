@@ -25,7 +25,8 @@
       "proxyEnabled": false,
       "secureCookieEnabled": true,
       "termsAndConditionsEnabled": false,
-      "helmetEnabled": true
+      "helmetEnabled": true,
+      "altSecretsMountEnabled": false
     },
     "helmet": {
       "contentSecurityPolicy": {
