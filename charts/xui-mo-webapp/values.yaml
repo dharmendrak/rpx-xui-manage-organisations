@@ -6,29 +6,38 @@ nodejs:
   environment:
     REFORM_TEAM: rpx
     REFORM_SERVICE_NAME: xui-mo-webapp
-    NODE_ENV: production
     UV_THREADPOOL_SIZE: 64
-    PUI_ENV: prod
-    SESSION_SECRET: secretSauce
     NODE_TLS_REJECT_UNAUTHORIZED: 1
-    PROXY_HOST: 172.16.0.7
-    PROXY_PORT: 0
     PORT: 3000
+
+    # NODE_ENV: Required, this should always be set to production as required by Reform.
+    NODE_ENV: production
+
+    # MICROSERVICE: Required
+    MICROSERVICE: xui_webapp
+
+    SESSION_SECRET: secretSauce
     NOW: false
-    IDAM_CLIENT: xuimowebapp
-    OAUTH_CALLBACK_URL: /oauth2/callback
-    MAX_LOG_LINE: 80
-    EXCEPTION_OPTIONS_MAX_LINES: 1
-    INDEX_URL: /
-    LOGGING: debug
-    PROTOCOL: https
-    SECURE_COOKIE: false
     COOKIE_TOKEN: __auth__
     COOKIE_USER_ID: __userid__
-    MICROSERVICE: xui_webapp
+
+    MAX_LOG_LINE: 80
+    EXCEPTION_OPTIONS_MAX_LINES: 1
+    LOGGING: debug
+
+    INDEX_URL: /
+
+    PROTOCOL: https
+
+    # Deprecate
+    PUI_ENV: prod
     NODE_CONFIG_ENV: prod
-    # Allow config mutations is required for Secrets to attach to config object within code
+    PROXY_HOST: 172.16.0.7
+    PROXY_PORT: 0
+
+    # ALLOW_CONFIG_MUTATIONS: Required for Secrets to attach to configuration object within code
     ALLOW_CONFIG_MUTATIONS: 1
+
     # Feature Toggles
     FEATURE_APP_INSIGHTS_ENABLED: true
     FEATURE_SECURE_COOKIE_ENABLED: true
@@ -36,15 +45,18 @@ nodejs:
     FEATURE_TERMS_AND_CONDITIONS_ENABLED: false
     FEATURE_HELMET_ENABLED: true
 
-    # IDAM_URL: https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net
-    # S2S_URL: http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
-
+    # Idam
+    IDAM_CLIENT: xuimowebapp
     IDAM_API_SERVICE: https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net
     IDAM_WEB_SERVICE: https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net
+    OAUTH_CALLBACK_URL: /oauth2/callback
+
+    # 3rd Party Services
     RD_PROFESSIONAL_API_SERVICE: http://rd-professional-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
     S2S_SERVICE: http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
     FEE_AND_PAY_API: http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
     SERVICES_TERMS_AND_CONDITIONS_API_SERVICE: http://xui-terms-and-conditions-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal
+
   keyVaults:
     rpx:
       resourceGroup: rpx

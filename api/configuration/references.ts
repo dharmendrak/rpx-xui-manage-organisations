@@ -27,7 +27,6 @@ export const MICROSERVICE = 'microservice'
 export const NOW = 'now'
 export const OAUTH_CALLBACK_URL = 'oauthCallbackUrl'
 export const PROTOCOL = 'protocol'
-// export const SECURE_COOKIE = 'secureCookie'
 
 export const SERVICES_IDAM_API_PATH = 'services.idamApi'
 export const SERVICES_IDAM_WEB = 'services.idamWeb'
