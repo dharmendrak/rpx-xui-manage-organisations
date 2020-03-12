@@ -1,5 +1,4 @@
 {
-    "environment": "DEFAULT ENVIRONMENT",
     "appInsightsInstrumentationKey": "",
     "cookies": {
         "token": "__auth__",

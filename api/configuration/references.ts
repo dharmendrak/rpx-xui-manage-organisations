@@ -13,8 +13,6 @@ export const APP_INSIGHTS_KEY = 'secrets.rpx.AppInsightsInstrumentationKey'
 export const S2S_SECRET = 'secrets.rpx.mo-s2s-client-secret'
 export const IDAM_SECRET = 'secrets.rpx.xui-oauth2-token'
 
-export const ENVIRONMENT = 'environment'
-
 export const COOKIE_TOKEN = 'cookies.token'
 export const COOKIES_USERID = 'cookies.userId'
 
