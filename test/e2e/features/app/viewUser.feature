@@ -1,4 +1,4 @@
- @fullFunctional
+ @fullFunctional @regression
 Feature: view user workflow
 
 

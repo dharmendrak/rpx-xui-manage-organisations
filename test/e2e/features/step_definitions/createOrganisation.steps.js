@@ -20,7 +20,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     browser.sleep(MID_DELAY);
   });
 
-  Then(/^I land on register organisation page and continue$/, { timeout: 600 * 1000 }, async function () {
+  Then(/^I land on register organisation page and continue$/, async function () {
         // await waitForElement('govuk-heading-xl');
         browser.sleep(LONG_DELAY);
         await expect(createOrganisationObject.start_button.isDisplayed()).to.eventually.be.true;
@@ -107,7 +107,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     await createOrganisationObject.enterEmailAddress(global.latestOrgSuperUser);
     await createOrganisationObject.continue_button.click();
 
-    
+
     // browser.sleep(MID_DELAY);
   });
 
