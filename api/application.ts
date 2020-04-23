@@ -8,10 +8,12 @@ import * as auth from './auth'
 import {environmentCheckText, getConfigValue, getEnvironment, showFeature} from './configuration'
 import {ERROR_NODE_CONFIG_ENV} from './configuration/constants'
 import {
+  APP_INSIGHTS_KEY,
   FEATURE_HELMET_ENABLED,
   FEATURE_REDIS_ENABLED,
   FEATURE_SECURE_COOKIE_ENABLED,
   HELMET,
+  IDAM_SECRET,
   SERVICE_S2S_PATH,
   SERVICES_FEE_AND_PAY_API_PATH,
   SERVICES_IDAM_API_PATH,
@@ -19,6 +21,7 @@ import {
   SERVICES_RD_PROFESSIONAL_API_PATH,
   SERVICES_TERMS_AND_CONDITIONS_API_PATH,
   SESSION_SECRET,
+  S2S_SECRET,
   FEATURE_TERMS_AND_CONDITIONS_ENABLED,
 } from './configuration/references'
 import {appInsights} from './lib/appInsights'
@@ -71,6 +74,12 @@ app.use(appInsights)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
+
+console.log(getConfigValue(APP_INSIGHTS_KEY))
+console.log('s2s secret')
+console.log(getConfigValue(S2S_SECRET))
+console.log('idam secret')
+console.log(getConfigValue(IDAM_SECRET))
 
 tunnel.init()
 

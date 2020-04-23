@@ -52,6 +52,8 @@ export class UserRolesUtil {
             }
         });
     }
+
+    // TODO: Verify this is still meaningful
     static isAddingRoleSuccessful(response: any): boolean {
         return response.roleAdditionResponse &&
         response.roleAdditionResponse.idamStatusCode &&

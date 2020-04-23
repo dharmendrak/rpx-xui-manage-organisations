@@ -66,6 +66,11 @@ export class UserProfileEffects {
     switchMap((user) => {
       return this.userService.editUserPermissions(user).pipe(
         map( response => {
+          console.log('edit user');
+          // TODO: Based on which one of these is successfull then create a new action,
+          // probably need 2 new actions.
+          // both successfull / both failed etc.
+          // TODO: Find test case where you can
           if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
             this.loggerService.info('User permissions modified');
             return new usersActions.EditUserSuccess(user.userId);
