@@ -96,11 +96,21 @@ export class AppEffects {
   }
 
   private getObservable(featureNames: string[]): Observable<boolean>[] {
-    let observables = new Array<Observable<boolean>>();
-    featureNames.forEach(featureName => {
-      const observable = this.featureToggleService.isEnabled(featureName);
-      observables = [...observables, observable];
-    });
-    return observables;
+    return [of(true), of(true)];
+    // let observables = new Array<Observable<boolean>>();
+    // featureNames.forEach(featureName => {
+    //   const observable = this.featureToggleService.isEnabled(featureName);
+    //   observables = [...observables, observable];
+    // });
+    // return observables;
   }
+
+  // private getObservable(featureNames: string[]): Observable<boolean>[] {
+  //   let observables = new Array<Observable<boolean>>();
+  //   featureNames.forEach(featureName => {
+  //     const observable = this.featureToggleService.isEnabled(featureName);
+  //     observables = [...observables, observable];
+  //   });
+  //   return observables;
+  // }
 }
