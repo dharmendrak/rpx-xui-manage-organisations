@@ -19,7 +19,7 @@ const secret = getConfigValue(IDAM_SECRET)
 const logger = log4js.getLogger('auth')
 logger.level = getConfigValue(LOGGING)
 
-export async function attach(req: express.Request, res: express.Response, next: express.NextFunction) {
+export async function attach(req, res: express.Response, next: express.NextFunction) {
   const session = req.session!
   const accessToken = req.cookies[getConfigValue(COOKIE_TOKEN)]
 
@@ -56,7 +56,7 @@ export async function attach(req: express.Request, res: express.Response, next: 
   }
 }
 
-export async function getTokenFromCode(req: express.Request, res: express.Response): Promise<AxiosResponse> {
+export async function getTokenFromCode(req, res: express.Response): Promise<AxiosResponse> {
   logger.info(`IDAM STUFF ===>> ${getConfigValue(IDAM_CLIENT)}:${secret}`)
   const Authorization = `Basic ${Buffer.from(`${getConfigValue(IDAM_CLIENT)}:${secret}`).toString('base64')}`
   const options = {
@@ -82,7 +82,7 @@ export async function getTokenFromCode(req: express.Request, res: express.Respon
   )
 }
 
-async function sessionChainCheck(req: express.Request, res: express.Response, accessToken: string) {
+async function sessionChainCheck(req, res: express.Response, accessToken: string) {
   if (!req.session.auth) {
     logger.warn('Session expired. Trying to get user details again')
     console.log(getUserDetails(accessToken, idamUrl))
@@ -127,7 +127,7 @@ async function sessionChainCheck(req: express.Request, res: express.Response, ac
   return true
 }
 
-export async function oauth(req: express.Request, res: express.Response, next: express.NextFunction) {
+export async function oauth(req, res: express.Response, next: express.NextFunction) {
   logger.info('starting oauth callback')
   const response = await getTokenFromCode(req, res)
   const accessToken = response.data.access_token
@@ -169,7 +169,7 @@ export async function oauth(req: express.Request, res: express.Response, next: e
   }
 }
 
-export function doLogout(req: express.Request, res: express.Response, status: number = 302) {
+export function doLogout(req, res: express.Response, status: number = 302) {
   res.clearCookie(getConfigValue(COOKIE_TOKEN))
   res.clearCookie(getConfigValue(COOKIES_USERID))
   req.session.user = null

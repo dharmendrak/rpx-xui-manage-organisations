@@ -53,12 +53,16 @@ export class UserRolesUtil {
         });
     }
     static isAddingRoleSuccessful(response: any): boolean {
+        console.log('isAddingRoleSuccessful');
+        console.log(response);
         return response.roleAdditionResponse &&
         response.roleAdditionResponse.idamStatusCode &&
         response.roleAdditionResponse.idamStatusCode === '201';
     }
 
     static isDeletingRoleSuccessful(result: any): boolean {
+        console.log('isDeletingRoleSuccessful');
+        console.log(result);
         return result.roleDeletionResponse &&
         result.roleDeletionResponse[0].idamStatusCode &&
         result.roleDeletionResponse[0].idamStatusCode === '204';

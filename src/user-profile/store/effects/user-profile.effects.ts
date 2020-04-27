@@ -59,6 +59,11 @@ export class UserProfileEffects {
     })
   );
 
+  /**
+   *
+   * We throw the EditUserServerError which is listened to by the component,
+   * which in turn throws the service-down page.
+   */
   @Effect()
   editUser$ = this.actions$.pipe(
     ofType(usersActions.EDIT_USER),
@@ -66,13 +71,20 @@ export class UserProfileEffects {
     switchMap((user) => {
       return this.userService.editUserPermissions(user).pipe(
         map( response => {
-          if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
-            this.loggerService.info('User permissions modified');
-            return new usersActions.EditUserSuccess(user.userId);
-          } else {
-            this.loggerService.error('user permissions failed');
-            return new usersActions.EditUserFailure(user.userId);
-          }
+          // So we check if adding role is successful
+          // or if deleting a role is successfull
+          // so we're receiving a response back so that's, good, we just need
+          // to make sure the result set is valid.
+          // if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
+          //   console.log('User permissions modified');
+          //   this.loggerService.info('User permissions modified');
+          //   return new usersActions.EditUserSuccess(user.userId);
+          // } else {
+          //   console.log('user permissions failed');
+          //   this.loggerService.error('user permissions failed');
+            console.log('Throw error screen.');
+          return new usersActions.EditUserFailure(user.userId);
+          // }
         }),
         catchError(error => {
           this.loggerService.error(error);

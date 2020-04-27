@@ -137,8 +137,10 @@ import { UserRolesUtil } from '../utils/user-roles-util';
     const rolesDeleted = UserRolesUtil.getRolesDeleted(this.user, permissions);
     const editUserRolesObj = UserRolesUtil.mapEditUserRoles(this.user, rolesAdded, rolesDeleted);
     if (rolesAdded.length > 0 || rolesDeleted.length > 0) {
+      // TODO: Dispatch of action
       this.userStore.dispatch(new fromStore.EditUser({editUserRolesObj, userId: this.userId}));
     } else {
+      console.log('failure of dispatching action');
      /* tslint:disable-next-line */
       this.summaryErrors = { isFromValid: false, items: [{id: 'roles', message: 'You need to make a change before submitting. If you don\'t make a change, these permissions will stay the same' }],
       header: this.errorMessages.header};

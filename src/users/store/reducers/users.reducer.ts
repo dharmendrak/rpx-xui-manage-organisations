@@ -2,6 +2,7 @@ import { User } from '@hmcts/rpx-xui-common-lib';
 import { AppConstants } from 'src/app/app.constants';
 import {AppUtils} from 'src/app/utils/app-utils';
 import * as fromUsers from '../actions/user.actions';
+import {EDIT_USER_FAILURE} from '../actions/user.actions';
 
 export interface UsersListState {
   userList: User[];
@@ -124,6 +125,14 @@ export function reducer(
         ...state,
         reinvitePendingUser: action.payload
       };
+    }
+
+    case fromUsers.EDIT_USER_FAILURE: {
+      console.log('UserReducer: EDIT_USER_FAILURE');
+      // return {
+      //   ...state,
+      //   reinvitePendingUser: action.payload
+      // };
     }
 
     default:
