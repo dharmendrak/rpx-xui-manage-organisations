@@ -7,6 +7,7 @@ import * as fromRoot from '../../../app/store';
 import { checkboxesBeCheckedValidator } from '../../../custom-validators/checkboxes-be-checked.validator';
 import * as fromStore from '../../store';
 import { UserRolesUtil } from '../utils/user-roles-util';
+import { editUserFailureSelector } from '../../store/selectors';
 
 @Component({
     selector: 'app-edit-user-permission',
@@ -31,6 +32,7 @@ import { UserRolesUtil } from '../utils/user-roles-util';
     public dependanciesSubscription: Subscription;
     public editPermissionSuccessSubscription: Subscription;
     public editPermissionServerErrorSubscription: Subscription;
+    public editUserErrorSubscription: Subscription;
     public backUrl: string;
 
     public summaryErrors: {isFromValid: boolean; items: { id: string; message: any; }[]; header: string};
@@ -51,6 +53,19 @@ import { UserRolesUtil } from '../utils/user-roles-util';
       this.editPermissionServerErrorSubscription = this.actions$.pipe(ofType(fromStore.EDIT_USER_SERVER_ERROR)).subscribe(() => {
         this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
       });
+
+      this.userStore.select(editUserFailureSelector).subscribe(response => {
+        console.log('picked up on EDIT_USER_FAILURE 3');
+        console.log(response);
+        // this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
+      });
+
+      console.log(this.userStore.select(editUserFailureSelector))
+      // this.editUserFailure = editUserFailureSelector();
+      // this.editUserFailure = this.userStore.pipe(select(fromStore.editUserFailureSelector)).subscribe(() => {
+      //   console.log('picked up on EDIT_USER_FAILURE 2');
+      //   // this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
+      // });
 
       this.isLoading$ = this.userStore.pipe(select(fromStore.getGetUserLoading));
 
