@@ -54,18 +54,13 @@ import { editUserFailureSelector } from '../../store/selectors';
         this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
       });
 
-      this.userStore.select(editUserFailureSelector).subscribe(response => {
-        console.log('picked up on EDIT_USER_FAILURE 3');
-        console.log(response);
+      this.userStore.select(editUserFailureSelector).subscribe(editUserFailure => {
+        if (editUserFailure) {
+          console.log('re-direct to edit user failure page.');
+          this.routerStore.dispatch(new fromRoot.Go({ path: [`users/user/${this.userId}/editpermission-failure`] }));
+        }
         // this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
       });
-
-      console.log(this.userStore.select(editUserFailureSelector))
-      // this.editUserFailure = editUserFailureSelector();
-      // this.editUserFailure = this.userStore.pipe(select(fromStore.editUserFailureSelector)).subscribe(() => {
-      //   console.log('picked up on EDIT_USER_FAILURE 2');
-      //   // this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
-      // });
 
       this.isLoading$ = this.userStore.pipe(select(fromStore.getGetUserLoading));
 
