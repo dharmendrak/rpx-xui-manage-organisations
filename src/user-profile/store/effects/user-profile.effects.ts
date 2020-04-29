@@ -60,31 +60,29 @@ export class UserProfileEffects {
   );
 
   /**
+   * Edit User Effect
    *
-   * We throw the EditUserServerError which is listened to by the component,
-   * which in turn throws the service-down page.
+   * We proxy through the Node layer to edit a User's permissions. The call is proxy'ed onto the PRD 3rd party service.
+   *
+   * If PRD returns a 201 or 204 on successfully adding a User's permission we display the Edit Permissions page
+   * with the updated User's permissions.
+   *
+   * If PRD does not return a 201 or 204, then we show a permissions updated failure page. The permissions update failure
+   * page allows the logged in User to retry editing permissions by showing them a link taking them back to the
+   * Edit Permissions page.
    */
   @Effect()
-  editUser$ = this.actions$.pipe(
+  public editUser$ = this.actions$.pipe(
     ofType(usersActions.EDIT_USER),
     map((action: usersActions.EditUser) => action.payload),
     switchMap((user) => {
       return this.userService.editUserPermissions(user).pipe(
         map( response => {
-          // So we check if adding role is successful
-          // or if deleting a role is successfull
-          // so we're receiving a response back so that's, good, we just need
-          // to make sure the result set is valid.
-          // if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
-          //   console.log('User permissions modified');
-          //   this.loggerService.info('User permissions modified');
-          //   return new usersActions.EditUserSuccess(user.userId);
-          // } else {
-          //   console.log('user permissions failed');
-          //   this.loggerService.error('user permissions failed');
-            console.log('Throw error screen.');
-          return new usersActions.EditUserFailure(user.userId);
-          // }
+          if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
+            return new usersActions.EditUserSuccess(user.userId);
+          } else {
+            return new usersActions.EditUserFailure(user.userId);
+          }
         }),
         catchError(error => {
           this.loggerService.error(error);

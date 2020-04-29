@@ -2,7 +2,6 @@ import { User } from '@hmcts/rpx-xui-common-lib';
 import { AppConstants } from 'src/app/app.constants';
 import {AppUtils} from 'src/app/utils/app-utils';
 import * as fromUsers from '../actions/user.actions';
-import {EDIT_USER_FAILURE} from '../actions/user.actions';
 
 export interface UsersListState {
   userList: User[];
@@ -140,12 +139,12 @@ export function reducer(
     }
 
     case fromUsers.EDIT_USER_FAILURE: {
-      console.log('UserReducer: EDIT_USER_FAILURE');
-      return {
-        ...state,
-        editUserFailure: true,
-      };
-    }
+    console.log('UserReducer: EDIT_USER_FAILURE');
+    return {
+      ...state,
+      editUserFailure: true,
+    };
+  }
 
     case fromUsers.EDIT_USER_FAILURE_RESET: {
       console.log('UserReducer: EDIT_USER_FAILURE_RESET');

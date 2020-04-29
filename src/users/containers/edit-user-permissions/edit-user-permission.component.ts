@@ -56,10 +56,8 @@ import { editUserFailureSelector } from '../../store/selectors';
 
       this.userStore.select(editUserFailureSelector).subscribe(editUserFailure => {
         if (editUserFailure) {
-          console.log('re-direct to edit user failure page.');
           this.routerStore.dispatch(new fromRoot.Go({ path: [`users/user/${this.userId}/editpermission-failure`] }));
         }
-        // this.routerStore.dispatch(new fromRoot.Go({ path: [`service-down`] }));
       });
 
       this.isLoading$ = this.userStore.pipe(select(fromStore.getGetUserLoading));

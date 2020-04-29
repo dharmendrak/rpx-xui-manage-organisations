@@ -1,42 +1,35 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { ErrorMessage, GlobalError } from 'src/app/store/reducers/app.reducer';
+import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
 import * as fromStore from '../../store';
-import {EditUserFailureReset} from '../../store/actions';
-// import {EditUserFailureReset} from '../../store/actions/user.actions';
 
 @Component({
-    selector: 'app-edit-user-permissions-failure',
-    templateUrl: './edit-user-permissions-failure.component.html'
+  selector: 'app-edit-user-permissions-failure',
+  templateUrl: './edit-user-permissions-failure.component.html'
 })
 export class EditUserPermissionsFailureComponent implements OnInit {
 
-    public userId: string;
+  public userId: string;
 
-    constructor(
-      private readonly userStore: Store<fromStore.UserState>,
-      private readonly route: ActivatedRoute,
-    ) {
-    }
-    // public ngOnDestroy(): void {
-    //     // this.store.dispatch(new fromAppStore.ClearGlobalError());
-    // }
-    public ngOnInit(): void {
-      console.log('EditUserFailureComponent');
+  constructor(private readonly userStore: Store<fromStore.UserState>,
+              private readonly route: ActivatedRoute) {
+  }
 
-      this.userStore.dispatch(new fromStore.EditUserFailureReset());
+  /**
+   * ngOnInit
+   *
+   * We reset the edit user failure state so that the User can Edit a user permissions again.
+   *
+   * We use the userId from the url parameters so that we are able to direct the User back
+   * to the Edit Permissions page when they click on the User permissions link.
+   */
+  public ngOnInit(): void {
+    this.userStore.dispatch(new fromStore.EditUserFailureReset());
 
-      this.route.paramMap.subscribe(params => {
-        this.userId = params.get('userId');
-      });
+    this.route.paramMap.subscribe(params => {
+      this.userId = params.get('userId');
+    });
+  }
 
-      console.log(this.userId);
-    }
-
-    public getEditUserPermissionsLink = (userId: string) => `/users/user/${userId}`;
-
-    // public showErrorLinkWithNewTab(newTab?: boolean): string {
-    //     return (newTab !== null && newTab === true) ? '_blank' : '_self';
-    // }
+  public getEditUserPermissionsLink = (userId: string) => `/users/user/${userId}`;
 }
