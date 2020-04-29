@@ -9,10 +9,12 @@ import {AcceptTcService} from '../../../accept-tc/services/accept-tc.service';
 import * as fromRoot from '../../../app/store';
 import { LoggerService } from '../../../shared/services/logger.service';
 import * as usersActions from '../../../users/store/actions/user.actions';
+
 import {UserInterface} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
 import * as authActions from '../actions';
 import {AuthActionTypes} from '../actions/';
+import {EditUserFailure} from '../../../users/store/actions';
 
 @Injectable()
 export class UserProfileEffects {
@@ -78,10 +80,11 @@ export class UserProfileEffects {
     switchMap((user) => {
       return this.userService.editUserPermissions(user).pipe(
         map( response => {
-          if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
+          if (UserRolesUtil.isAddingRoleSuccessful(response) && UserRolesUtil.isDeletingRoleSuccessful(response)) {
             return new usersActions.EditUserSuccess(user.userId);
           } else {
-            return new usersActions.EditUserFailure(user.userId);
+            // If one or the other is un-successful, write up this logic.
+            return new EditUserFailure(user.userId);
           }
         }),
         catchError(error => {
