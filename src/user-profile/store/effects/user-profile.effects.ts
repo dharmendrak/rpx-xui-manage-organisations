@@ -80,10 +80,9 @@ export class UserProfileEffects {
     switchMap((user) => {
       return this.userService.editUserPermissions(user).pipe(
         map( response => {
-          if (UserRolesUtil.isAddingRoleSuccessful(response) && UserRolesUtil.isDeletingRoleSuccessful(response)) {
+          if (UserRolesUtil.isAddingRoleSuccessful(response) || UserRolesUtil.isDeletingRoleSuccessful(response)) {
             return new usersActions.EditUserSuccess(user.userId);
           } else {
-            // If one or the other is un-successful, write up this logic.
             return new EditUserFailure(user.userId);
           }
         }),

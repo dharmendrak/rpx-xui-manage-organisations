@@ -1,7 +1,8 @@
-import {ActivatedRoute} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Store} from '@ngrx/store';
-import * as fromStore from '../../store';
+import {EditUserFailureReset} from '../../store/actions';
+import {UserState} from '../../store/reducers';
 
 @Component({
   selector: 'app-edit-user-permissions-failure',
@@ -11,8 +12,8 @@ export class EditUserPermissionsFailureComponent implements OnInit {
 
   public userId: string;
 
-  constructor(private readonly userStore: Store<fromStore.UserState>,
-              private readonly route: ActivatedRoute) {
+  constructor(private readonly userStore: Store<UserState>,
+              private route: ActivatedRoute) {
   }
 
   /**
@@ -24,12 +25,14 @@ export class EditUserPermissionsFailureComponent implements OnInit {
    * to the Edit Permissions page when they click on the User permissions link.
    */
   public ngOnInit(): void {
-    this.userStore.dispatch(new fromStore.EditUserFailureReset());
+    this.userStore.dispatch(new EditUserFailureReset());
 
     this.route.paramMap.subscribe(params => {
       this.userId = params.get('userId');
     });
   }
 
-  public getEditUserPermissionsLink = (userId: string) => `/users/user/${userId}`;
+  public getEditUserPermissionsLink(userId: string): string {
+    return `/users/user/${userId}`;
+  }
 }
