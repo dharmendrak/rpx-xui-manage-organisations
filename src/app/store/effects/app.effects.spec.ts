@@ -92,7 +92,8 @@ describe('App Effects', () => {
           sessionTimeout: {
             idleModalDisplayTime: 10,
             pattern: '.',
-            totalIdleTime: 50
+            totalIdleTime: 50,
+            useSessionTimeout: true,
           },
           userId: '5b9639a7-49a5-4c85-9e17-bf55186c8afa'
       };

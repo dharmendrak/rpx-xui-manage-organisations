@@ -1,16 +1,14 @@
 /**
- * Default Session Idle Time
+ * Session Timeout off
  *
- * If the timeout configuration has not been set, or the User has no roles ( although the
- * User shouldn't reach this point if they have no roles associated with them ) the
- * default session idle time will be used.
+ * If the default timeout configuration has not been set, or the User has no roles ( although the
+ * User shouldn't reach this point if they have no roles associated with them ), or
+ * there is no matching User Roles for the User then the session timeout modal should be off and not shown,
+ * as requested by the BA.
  */
 
-export const DEFAULT_SESSION_TIMEOUT = {
-  idleModalDisplayTime: 2,
-  pattern: 'ERROR: NO-SESSION_TIMEOUT_SET. You need to set a DEFAULT Session Timeout for this application through the configuration file. ie.' +
-  'use the pattern ".", @see unit tests. The totalIdleTime will be set to a low value.',
-  totalIdleTime: 12,
+export const SESSION_TIMEOUT_OFF = {
+  useSessionTimeout: false,
 }
 
 /**
@@ -122,5 +120,5 @@ export const getUserSessionTimeout = (userRoles, sessionTimeouts) => {
     }
   }
 
-  return DEFAULT_SESSION_TIMEOUT
+  return SESSION_TIMEOUT_OFF
 }

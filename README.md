@@ -173,6 +173,9 @@ The application pulls out the secrets directly using `propertiesVolume.addTo()`
 The applications Session Timeouts are set via configuration and can be overridden, please @see default.json
 and @see .env.defaults.
 
+Session Timeouts are in minutes as it's easier to see and change the unit of time quickly which is a requirement
+from the BA.
+
 Example configuration:
 ```javascript
 SESSION_TIMEOUTS=[{"idleModalDisplayTime": 6, "pattern":"pui-", "totalIdleTime": 55},{"idleModalDisplayTime": 3, "pattern":"caseworker-", "totalIdleTime": 30}, {"idleModalDisplayTime": 6, "pattern":".", "totalIdleTime": 60}]
@@ -180,7 +183,7 @@ SESSION_TIMEOUTS=[{"idleModalDisplayTime": 6, "pattern":"pui-", "totalIdleTime":
  
 Note that the wildcard Reg Ex '.' pattern seen in the following sets the applications default.
 ```javascript
-{"idleModalDisplayTime": 6, "pattern":".", "totalIdleTime": 60
+{"idleModalDisplayTime": 6, "pattern":".", "totalIdleTime": 60, "useSessionTimeout": true}
 ```
 
 Each Session Timeout object accepts a Reg Ex pattern, which sets the Session Timeout for that User group.
@@ -197,5 +200,9 @@ Session Timeout Configuration - An array that contains the Applications and User
 
 Session Timeout - An object that contains the Idle Modal Display Time, Reg Ex pattern so that we use
 the correct Session Timeout for the application / and or User Groups and Total Idle Time.  
+
+useSessionTimeout - Used to switch off the Session Timeout Modal for a User. It's set by default to false, ie. the Session Timeout Modal
+will never show, unless the application has been configured to show the Session Timeout Modal by setting it up in
+the configuration.
 
 END

@@ -97,12 +97,7 @@ export class AppEffects {
   @Effect()
   public idleSignout = this.actions$.pipe(
     ofType(appActions.IDLE_USER_SIGNOUT),
-
-    // TODO: We need to make a call to the backend to logout, and then
-    // re-direct the UI to idle-sign-out
-
     map(() => {
-
       const { hostname, port } = window.location;
       const portNumber = port ? `:${port}` : '';
       const baseUrl = `${this.environmentConfig.protocol}://${hostname}${portNumber}`;

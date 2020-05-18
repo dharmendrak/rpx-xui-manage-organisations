@@ -67,7 +67,8 @@ describe('Fee accounts Effects', () => {
               sessionTimeout: {
                 idleModalDisplayTime: 10,
                 pattern: '.',
-                totalIdleTime: 50
+                totalIdleTime: 50,
+                useSessionTimeout: true,
               },
               roles: []
           };
@@ -136,7 +137,8 @@ describe('Fee accounts Effects', () => {
                 userId: '1',
                 sessionTimeout: {
                   idleModalDisplayTime: 10,
-                  totalIdleTime: 50
+                  totalIdleTime: 50,
+                  useSessionTimeout: true,
                 },
             };
             const action = new GetUserDetailsFailure(new HttpErrorResponse({}));

@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {anyRolesMatch, DEFAULT_SESSION_TIMEOUT, getUserSessionTimeout, isRoleMatch, sortUserRoles} from './userTimeout'
+import {anyRolesMatch, getUserSessionTimeout, isRoleMatch, SESSION_TIMEOUT_OFF, sortUserRoles} from './userTimeout'
 
 describe('userTimeout', () => {
 
@@ -154,7 +154,7 @@ describe('userTimeout', () => {
       expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(roleGroupSessionTimeouts[1])
     })
 
-    it('should return the DEFAULT_SESSION_TIMEOUT if the XUI team accidentally sets an incorrect default reg ex pattern.', () => {
+    it('should return the SESSION_TIMEOUT_OFF if the XUI team accidentally sets an incorrect default reg ex pattern.', () => {
 
       const roles = [
         'pui-organisation-manager',
@@ -166,10 +166,10 @@ describe('userTimeout', () => {
         totalIdleTime: 60,
       }]
 
-      expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(DEFAULT_SESSION_TIMEOUT)
+      expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(SESSION_TIMEOUT_OFF)
     })
 
-    it('should return the DEFAULT_SESSION_TIMEOUT if the XUI team accidentally does not set a DEFAULT Session Timeout via the' +
+    it('should return the SESSION_TIMEOUT_OFF if the XUI team accidentally does not set a DEFAULT Session Timeout via the' +
       'configuration.', () => {
 
       const roles = [
@@ -178,25 +178,27 @@ describe('userTimeout', () => {
 
       const roleGroupSessionTimeouts = []
 
-      expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(DEFAULT_SESSION_TIMEOUT)
+      expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(SESSION_TIMEOUT_OFF)
     })
 
     /**
-     * The following should never happen but the production code should be resilient to this edge case.
+     * If there are no matching user roles we need to switch the session timeout modal off.
      */
-    it('should return the DEFAULT_SESSION_TIMEOUT if there are no User Roles.', () => {
+    it('should return the SESSION_TIMEOUT_OFF if there are no matching User Roles.', () => {
 
-      const roles = []
+      const roles = [
+        'pui-organisation-manager',
+      ]
 
       const roleGroupSessionTimeouts = [
         {
           idleModalDisplayTime: 10,
-          pattern: 'organisation',
+          pattern: 'nomatchingpattern',
           totalIdleTime: 80,
         },
       ]
 
-      expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(DEFAULT_SESSION_TIMEOUT)
+      expect(getUserSessionTimeout(roles, roleGroupSessionTimeouts)).to.equal(SESSION_TIMEOUT_OFF)
     })
 
     it('should give preference to Session Timeout patterns in a PRIORITY ORDER. A pattern nearer to the top of the list is' +

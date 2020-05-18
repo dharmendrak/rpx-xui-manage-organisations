@@ -15,6 +15,7 @@ export class UserModel {
 export interface SessionTimeout {
   idleModalDisplayTime: number;
   totalIdleTime: number;
+  useSessionTimeout: boolean;
 }
 
 export interface UserInterface {

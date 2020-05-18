@@ -96,7 +96,8 @@
     {
       "idleModalDisplayTime": 10,
       "pattern": ".",
-      "totalIdleTime": 50
+      "totalIdleTime": 50,
+      "useSessionTimeout": true
     }
   ]
 }

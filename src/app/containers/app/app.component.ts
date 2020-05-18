@@ -68,26 +68,15 @@ export class AppComponent implements OnInit {
     }
 
     this.addIdleServiceListener();
-    this.addUserProfileListener();
   }
 
   /**
    * Add Idle Service Listener
    *
-   * We listen for idle service events, that alert the application to the User being Idle.
-   */
-  public addIdleServiceListener() {
-
-    this.idleService.appStateChanges().subscribe(event => {
-      this.idleServiceEventHandler(event);
-    });
-  }
-
-  /**
-   * Add User Profile Listener
+   * We listen for User Profile details. Once the application has these details we are able to initialise the idle timer if
+   * we need to for the User.
    *
-   * We listen for User Profile details. Once the application has these details we are able to initialise the idle timer,
-   * which displays a Session Timeout Modal to the User if they have been idle for x amount of time.
+   * This will display a Session Timeout Modal to the User if they have been idle for x amount of time.
    *
    * The User profile details contain the User's session timeout information.
    *
@@ -95,16 +84,27 @@ export class AppComponent implements OnInit {
    *
    * TODO: Remove console.log(userProfile) after testing
    */
-  public addUserProfileListener() {
+  public addIdleServiceListener() {
 
     this.store.pipe(select(fromUserProfile.getUser)).subscribe(userProfile => {
+
       if (userProfile) {
         console.log(userProfile);
-        const { idleModalDisplayTime, totalIdleTime } = userProfile.sessionTimeout;
+        const { idleModalDisplayTime, totalIdleTime, useSessionTimeout } = userProfile.sessionTimeout;
 
-        this.initIdleService(idleModalDisplayTime, totalIdleTime);
+        if (useSessionTimeout) {
+          this.initIdleServiceAndListener(idleModalDisplayTime, totalIdleTime);
+        }
       }
     });
+  }
+
+  public initIdleServiceAndListener(idleModalDisplayTime, totalIdleTime) {
+    console.log('Use Idle Service');
+    this.idleService.appStateChanges().subscribe(event => {
+      this.idleServiceEventHandler(event);
+    });
+    this.initIdleService(idleModalDisplayTime, totalIdleTime);
   }
 
   /**
@@ -129,7 +129,6 @@ export class AppComponent implements OnInit {
       }
       case IDLE_EVENT_SIGNOUT: {
         this.dispatchModal(undefined, false);
-        // this.onNavigate('sign-out');
         this.store.dispatch(new fromRoot.IdleUserSignOut());
         return;
       }

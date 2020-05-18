@@ -20,7 +20,8 @@ describe('User Profile Reducer', () => {
             roles: [],
             sessionTimeout: {
               idleModalDisplayTime: 10,
-              totalIdleTime: 50
+              totalIdleTime: 50,
+              useSessionTimeout: true,
             },
             userId: '',
         });
@@ -32,7 +33,8 @@ describe('User Profile Reducer', () => {
             roles: [],
             sessionTimeout: {
               idleModalDisplayTime: 10,
-              totalIdleTime: 50
+              totalIdleTime: 50,
+              useSessionTimeout: true,
             },
             userId: ''
         });

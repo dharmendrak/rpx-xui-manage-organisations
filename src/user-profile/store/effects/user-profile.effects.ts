@@ -57,7 +57,8 @@ export class UserProfileEffects {
         roles: ['pui-case-manager', 'pui-user-manager', 'pui-finance-manager' , 'pui-organisation-manager'],
         sessionTimeout: {
           idleModalDisplayTime: 10,
-          totalIdleTime: 50
+          totalIdleTime: 50,
+          useSessionTimeout: true,
         },
         userId: '1',
       };
